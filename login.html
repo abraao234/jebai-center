@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://lrhgwpbsujkkuouyhcli.supabase.co wss://lrhgwpbsujkkuouyhcli.supabase.co; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Login — Jebai Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #F5C800;
+    --yellow-dark: #e0b400;
+    --teal: #20b2ad;
+    --teal-dark: #159892;
+    --green: #3DAA6B;
+    --green-dark: #2e8e58;
+    --red: #CC0000;
+    --dark: #222222;
+    --gray: #555555;
+    --light-gray: #f5f5f5;
+    --border: #e0e0e0;
+    --white: #ffffff;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    background: var(--light-gray);
+    font-size: 14px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== HEADER ===== */
+  header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--dark);
+    letter-spacing: 0.3px;
+  }
+  .header-back {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .header-back:hover { color: var(--teal-dark); }
+
+  /* ===== MAIN LAYOUT ===== */
+  .page-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px 60px;
+  }
+
+  /* ===== CARD CONTAINER ===== */
+  .auth-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    width: 100%;
+    max-width: 460px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ===== TAB NAV ===== */
+  .auth-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 2px solid var(--border);
+  }
+  .auth-tab {
+    padding: 18px 0;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    color: var(--gray);
+    cursor: pointer;
+    background: var(--light-gray);
+    border: none;
+    transition: color 0.2s, background 0.2s;
+    user-select: none;
+  }
+  .auth-tab.active {
+    color: var(--teal);
+    background: #fff;
+    border-bottom: 3px solid var(--teal);
+    margin-bottom: -2px;
+  }
+  .auth-tab:hover:not(.active) {
+    color: var(--dark);
+    background: #efefef;
+  }
+
+  /* ===== PANELS ===== */
+  .auth-panel {
+    display: none;
+    padding: 36px 36px 32px;
+    animation: fadeUp 0.3s ease;
+  }
+  .auth-panel.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== PANEL HEADER ===== */
+  .panel-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .panel-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .panel-subtitle {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 28px;
+  }
+
+  /* ===== FORM ===== */
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .input-wrap svg {
+    position: absolute;
+    left: 13px;
+    width: 16px;
+    height: 16px;
+    stroke: #bbb;
+    fill: none;
+    stroke-width: 2;
+    pointer-events: none;
+    transition: stroke 0.2s;
+  }
+  .input-wrap input {
+    width: 100%;
+    padding: 11px 14px 11px 40px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: var(--dark);
+    background: #fafafa;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .input-wrap input:focus {
+    border-color: var(--teal);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(32,178,173,0.12);
+  }
+  .input-wrap input:focus + svg,
+  .input-wrap:focus-within svg { stroke: var(--teal); }
+
+  /* pw toggle btn */
+  .pw-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+  .pw-toggle:hover { color: var(--teal); }
+  .pw-toggle svg { width: 16px; height: 16px; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* ===== FORGOT LINK ===== */
+  .forgot-link {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-top: -10px;
+    margin-bottom: 22px;
+    cursor: pointer;
+  }
+  .forgot-link:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  /* ===== BTN ===== */
+  .btn-primary {
+    width: 100%;
+    background: var(--teal);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    letter-spacing: 0.2px;
+    margin-bottom: 16px;
+  }
+  .btn-primary:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(32,178,173,0.3);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0 16px;
+    color: var(--gray);
+    font-size: 12px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== SOCIAL BTNS ===== */
+  .social-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-social:hover {
+    border-color: #bbb;
+    background: var(--light-gray);
+  }
+  .btn-social svg { width: 18px; height: 18px; }
+
+  /* ===== SWITCH HINT ===== */
+  .switch-hint {
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+  .switch-hint a {
+    color: var(--teal);
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .switch-hint a:hover { color: var(--teal-dark); text-decoration: underline; }
+
+  /* ===== PASSWORD STRENGTH ===== */
+  .pw-strength {
+    margin-top: 8px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .pw-bar {
+    height: 4px;
+    flex: 1;
+    border-radius: 4px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+  .pw-strength-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray);
+    margin-left: 6px;
+    min-width: 48px;
+  }
+
+  /* ===== TERMS ===== */
+  .terms-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+    cursor: pointer;
+  }
+  .terms-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    accent-color: var(--teal);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .terms-check span {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .terms-check span a {
+    color: var(--teal);
+    font-weight: 600;
+  }
+  .terms-check span a:hover { text-decoration: underline; }
+
+  /* ===== TOAST ===== */
+  #toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 13px 26px;
+    border-radius: 999px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+  }
+  #toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  #toast.success { background: var(--green); }
+  #toast.error { background: var(--red); }
+
+  /* ===== FORGOT MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; animation: fadeIn .2s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal-box {
+    background: #fff;
+    border-radius: 18px;
+    padding: 36px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    animation: slideUp .25s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .modal-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    margin-bottom: 6px;
+  }
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 22px;
+  }
+  .modal-close {
+    float: right;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray);
+    font-size: 20px;
+    line-height: 1;
+    margin-top: -4px;
+  }
+  .modal-close:hover { color: var(--dark); }
+
+  /* ===== YELLOW ACCENT STRIPE ===== */
+  .accent-stripe {
+    height: 5px;
+    background: linear-gradient(90deg, var(--yellow) 0%, var(--teal) 100%);
+    border-radius: 18px 18px 0 0;
+  }
+
+  /* ===== FIELD ERROR ===== */
+  .field-error {
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 600;
+    margin-top: 5px;
+    display: none;
+  }
+  .field-error.visible { display: block; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark);
+    color: #aaa;
+    text-align: center;
+    font-size: 12px;
+    padding: 16px;
+  }
+  footer span { color: var(--yellow); font-weight: 700; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 520px) {
+    .auth-panel { padding: 28px 20px 24px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .social-btns { grid-template-columns: 1fr; }
+    .panel-title { font-size: 19px; }
+  }
+
+
+  /* ===== MINHA CONTA / CONFIGURAÇÕES ===== */
+  .account-page {
+    flex: 1;
+    display: none;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 34px 16px 54px;
+  }
+  .account-page.active { display: block; }
+  .account-hero {
+    background: linear-gradient(135deg, var(--teal), #0f7772);
+    color: #fff;
+    border-radius: 22px;
+    padding: 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 12px 35px rgba(32,178,173,.24);
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+  }
+  .account-hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .account-hero p { opacity: .9; }
+  .account-avatar {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: rgba(255,255,255,.18);
+    border: 2px solid rgba(255,255,255,.35);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 26px;
+    flex-shrink: 0;
+  }
+  .account-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 18px;
+  }
+  .account-nav, .account-section {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 4px 22px rgba(0,0,0,.07);
+  }
+  .account-nav { padding: 12px; align-self: start; }
+  .account-nav button, .account-logout {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 13px 14px;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    transition: .2s;
+  }
+  .account-nav button:hover, .account-nav button.active {
+    background: rgba(32,178,173,.10);
+    color: var(--teal);
+  }
+  .account-logout { color: var(--red); margin-top: 8px; }
+  .account-section { padding: 26px; display: none; }
+  .account-section.active { display: block; animation: fadeUp .25s ease; }
+  .account-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 21px;
+    margin-bottom: 6px;
+  }
+  .account-section .section-desc { color: var(--gray); margin-bottom: 22px; }
+  .account-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .btn-secondary {
+    background: #fff;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .account-info-card {
+    border: 1px dashed #cfd8dc;
+    background: #fafafa;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 18px;
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  @media (max-width: 760px) {
+    .account-hero { align-items: flex-start; }
+    .account-grid { grid-template-columns: 1fr; }
+    .account-nav { display: grid; grid-template-columns: 1fr 1fr; }
+    .account-logout { grid-column: 1 / -1; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="jebai-center.html" class="logo-link">
+      <!-- Logo SVG do Jebai Center -->
+      <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" width="32" height="38">
+        <path d="M72,8 L72,75 Q72,105 45,105 Q18,105 18,78" fill="none" stroke="#F5C018" stroke-width="11" stroke-linecap="round"/>
+        <path d="M57,22 L57,75 Q57,91 45,91 Q33,91 33,78" fill="none" stroke="#B0B0B0" stroke-width="10" stroke-linecap="round"/>
+        <path d="M43,8 L43,75 Q43,78 45,78" fill="none" stroke="#2BBFB0" stroke-width="10" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-label">Jebai Center</span>
+    </a>
+    <a href="jebai-center.html" class="header-back">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar ao site
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="page-main">
+  <div class="auth-card">
+    <div class="accent-stripe"></div>
+
+    <!-- TABS -->
+    <div class="auth-tabs" role="tablist">
+      <button class="auth-tab active" id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login" onclick="switchTab('login')">
+        Entrar
+      </button>
+      <button class="auth-tab" id="tab-cadastro" role="tab" aria-selected="false" aria-controls="panel-cadastro" onclick="switchTab('cadastro')">
+        Criar Conta
+      </button>
+    </div>
+
+    <!-- ===== PAINEL LOGIN ===== -->
+    <div class="auth-panel active" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+      <div class="panel-title">Bem-vindo de volta!</div>
+      <div class="panel-subtitle">Acesse sua conta para aproveitar os melhores preços.</div>
+
+      <!-- Social -->
+      <div class="social-btns">
+        <button class="btn-social" onclick="socialLogin('Google')">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </button>
+        <button class="btn-social" onclick="socialLogin('Facebook')">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#1877F2"/></svg>
+          Facebook
+        </button>
+      </div>
+
+      <div class="divider">ou entre com seu e-mail</div>
+
+      <!-- Form Login -->
+      <div class="form-group">
+        <label for="login-email">E-mail</label>
+        <div class="input-wrap">
+          <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="field-error" id="login-email-err">Por favor, insira um e-mail válido.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="login-senha">Senha</label>
+        <div class="input-wrap">
+          <input type="password" id="login-senha" placeholder="Sua senha" autocomplete="current-password">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="pw-toggle" type="button" onclick="togglePw('login-senha', this)" aria-label="Mostrar senha">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="field-error" id="login-senha-err">Senha deve ter pelo menos 6 caracteres.</div>
+      </div>
+
+      <a class="forgot-link" onclick="openForgot()">Esqueci minha senha</a>
+
+      <button class="btn-primary" id="btn-login" onclick="handleLogin()">Entrar na Minha Conta</button>
+
+      <p class="switch-hint">Não tem conta? <a onclick="switchTab('cadastro')">Criar conta grátis</a></p>
+    </div>
+
+    <!-- ===== PAINEL CADASTRO ===== -->
+    <div class="auth-panel" id="panel-cadastro" role="tabpanel" aria-labelledby="tab-cadastro">
+      <div class="panel-title">Crie sua conta</div>
+      <div class="panel-subtitle">Cadastre-se e aproveite as melhores ofertas do Jebai Center.</div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cad-nome">Nome</label>
+          <div class="input-wrap">
+            <input type="text" id="cad-nome" placeholder="Seu nome" autocomplete="given-name">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="field-error" id="cad-nome-err">Nome é obrigatório.</div>
+        </div>
+        <div class="form-group">
+          <label for="cad-sobrenome">Sobrenome</label>
+          <div class="input-wrap">
+            <input type="text" id="cad-sobrenome" placeholder="Sobrenome" autocomplete="family-name">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="field-error" id="cad-sobrenome-err">Sobrenome é obrigatório.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cad-email">E-mail</label>
+        <div class="input-wrap">
+          <input type="email" id="cad-email" placeholder="seu@email.com" autocomplete="email">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="field-error" id="cad-email-err">Por favor, insira um e-mail válido.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="cad-whatsapp">WhatsApp (opcional)</label>
+        <div class="input-wrap">
+          <input type="tel" id="cad-whatsapp" placeholder="+55 45 99999-9999" autocomplete="tel">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.71 3.41 2 2 0 0 1 3.7 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.11-1.11a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cad-senha">Senha</label>
+        <div class="input-wrap">
+          <input type="password" id="cad-senha" placeholder="Mínimo 6 caracteres" autocomplete="new-password" oninput="checkPwStrength(this.value)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="pw-toggle" type="button" onclick="togglePw('cad-senha', this)" aria-label="Mostrar senha">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="field-error" id="cad-senha-err">Senha deve ter pelo menos 6 caracteres.</div>
+        <div class="pw-strength" id="pw-strength-wrap" style="display:none">
+          <div class="pw-bar" id="bar1"></div>
+          <div class="pw-bar" id="bar2"></div>
+          <div class="pw-bar" id="bar3"></div>
+          <div class="pw-bar" id="bar4"></div>
+          <span class="pw-strength-label" id="pw-strength-label"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cad-confirma">Confirmar Senha</label>
+        <div class="input-wrap">
+          <input type="password" id="cad-confirma" placeholder="Repita a senha" autocomplete="new-password">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <button class="pw-toggle" type="button" onclick="togglePw('cad-confirma', this)" aria-label="Mostrar senha">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="field-error" id="cad-confirma-err">As senhas não coincidem.</div>
+      </div>
+
+      <label class="terms-check">
+        <input type="checkbox" id="cad-terms">
+        <span>Concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a> do Jebai Center.</span>
+      </label>
+      <div class="field-error" id="cad-terms-err" style="margin-top:-16px; margin-bottom:14px;">Você precisa aceitar os termos.</div>
+
+      <button class="btn-primary" id="btn-cadastro" onclick="handleCadastro()">Criar Minha Conta</button>
+
+      <p class="switch-hint">Já tem conta? <a onclick="switchTab('login')">Entrar agora</a></p>
+    </div>
+  </div>
+</main>
+
+
+
+<!-- MINHA CONTA / CONFIGURAÇÕES -->
+<section class="account-page" id="accountPage" aria-label="Configurações da conta">
+  <div class="account-hero">
+    <div>
+      <h1>Configurações da Conta</h1>
+      <p>Gerencie seus dados, altere sua senha e mantenha sua conta atualizada.</p>
+    </div>
+    <div class="account-avatar" id="accountAvatar">JC</div>
+  </div>
+
+  <div class="account-grid">
+    <nav class="account-nav" aria-label="Menu da conta">
+      <button class="active" type="button" data-account-tab="dados" onclick="switchAccountTab('dados')">👤 Meus dados</button>
+      <button type="button" data-account-tab="senha" onclick="switchAccountTab('senha')">🔒 Alterar senha</button>
+      <button type="button" data-account-tab="recuperar" onclick="switchAccountTab('recuperar')">🔑 Recuperar senha</button>
+      <button type="button" data-account-tab="privacidade" onclick="switchAccountTab('privacidade')">🛡️ Privacidade</button>
+      <button class="account-logout" type="button" onclick="logoutAccount()">↩ Sair da conta</button>
+    </nav>
+
+    <div>
+      <section class="account-section active" id="account-dados">
+        <h2>Meus dados</h2>
+        <p class="section-desc">Altere as informações básicas da sua conta.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="acc-nome">Nome</label>
+            <div class="input-wrap"><input id="acc-nome" type="text" placeholder="Seu nome"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          </div>
+          <div class="form-group">
+            <label for="acc-sobrenome">Sobrenome</label>
+            <div class="input-wrap"><input id="acc-sobrenome" type="text" placeholder="Seu sobrenome"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="acc-email">E-mail</label>
+            <div class="input-wrap"><input id="acc-email" type="email" placeholder="seu@email.com"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          </div>
+          <div class="form-group">
+            <label for="acc-telefone">Telefone</label>
+            <div class="input-wrap"><input id="acc-telefone" type="tel" placeholder="(00) 00000-0000"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.11 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.57 2.61a2 2 0 0 1-.45 2.11L8 9.67a16 16 0 0 0 6.33 6.33l1.23-1.23a2 2 0 0 1 2.11-.45c.84.25 1.71.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg></div>
+          </div>
+        </div>
+        <button class="btn-primary" type="button" onclick="saveAccountData()">Salvar alterações</button>
+      </section>
+
+      <section class="account-section" id="account-senha">
+        <h2>Alterar senha</h2>
+        <p class="section-desc">Digite sua senha atual e escolha uma nova senha.</p>
+        <div class="form-group"><label for="acc-senha-atual">Senha atual</label><div class="input-wrap"><input id="acc-senha-atual" type="password" placeholder="Senha atual"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div></div>
+        <div class="form-row">
+          <div class="form-group"><label for="acc-nova-senha">Nova senha</label><div class="input-wrap"><input id="acc-nova-senha" type="password" placeholder="Mínimo 6 caracteres"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div></div>
+          <div class="form-group"><label for="acc-confirma-senha">Confirmar nova senha</label><div class="input-wrap"><input id="acc-confirma-senha" type="password" placeholder="Repita a nova senha"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div></div>
+        </div>
+        <button class="btn-primary" type="button" onclick="changeAccountPassword()">Atualizar senha</button>
+      </section>
+
+      <section class="account-section" id="account-recuperar">
+        <h2>Recuperar senha</h2>
+        <p class="section-desc">Use esta opção caso tenha esquecido a senha. Nesta versão demo, a senha é redefinida pelo e-mail cadastrado.</p>
+        <div class="form-group"><label for="acc-rec-email">E-mail cadastrado</label><div class="input-wrap"><input id="acc-rec-email" type="email" placeholder="seu@email.com"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div></div>
+        <div class="form-row">
+          <div class="form-group"><label for="acc-rec-senha">Nova senha</label><div class="input-wrap"><input id="acc-rec-senha" type="password" placeholder="Nova senha"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div></div>
+          <div class="form-group"><label for="acc-rec-confirma">Confirmar senha</label><div class="input-wrap"><input id="acc-rec-confirma" type="password" placeholder="Repita a senha"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div></div>
+        </div>
+        <button class="btn-primary" type="button" onclick="recoverAccountPassword()">Redefinir senha</button>
+      </section>
+
+      <section class="account-section" id="account-privacidade">
+        <h2>Privacidade e segurança</h2>
+        <p class="section-desc">Área reservada para preferências da conta.</p>
+        <div class="account-info-card">
+          Seus dados estão sendo salvos localmente no navegador nesta versão de demonstração. Para um site publicado de verdade, o ideal é usar banco de dados, autenticação segura e recuperação de senha por e-mail real.
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Todos os direitos reservados © <span>Jebai Center</span> 2024 - Desenvolvido por <a href="https://evah.io" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'; this.style.textDecoration='underline';" onmouseout="this.style.color=''; this.style.textDecoration='none';">EVAH.io</a>
+</footer>
+
+<!-- MODAL ESQUECI SENHA -->
+<div class="modal-overlay" id="forgotModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeForgot()" aria-label="Fechar">×</button>
+    <div class="modal-title">Recuperar Senha</div>
+    <div class="modal-subtitle">Insira seu e-mail e enviaremos um link para redefinir sua senha.</div>
+    <div class="form-group">
+      <label for="forgot-email">E-mail cadastrado</label>
+      <div class="input-wrap">
+        <input type="email" id="forgot-email" placeholder="seu@email.com" autocomplete="email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="field-error" id="forgot-email-err">Por favor, insira um e-mail válido.</div>
+    </div>
+    <div class="form-group">
+      <label for="forgot-new-pass">Nova senha</label>
+      <div class="input-wrap">
+        <input type="password" id="forgot-new-pass" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="field-error" id="forgot-new-pass-err">A senha precisa ter pelo menos 6 caracteres.</div>
+    </div>
+    <div class="form-group">
+      <label for="forgot-confirm-pass">Confirmar nova senha</label>
+      <div class="input-wrap">
+        <input type="password" id="forgot-confirm-pass" placeholder="Repita a nova senha" autocomplete="new-password">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="field-error" id="forgot-confirm-pass-err">As senhas não coincidem.</div>
+    </div>
+    <button class="btn-primary" onclick="handleForgot()">Redefinir Senha</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" role="alert" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth-utils.js"></script>
+<script>
+  const supabaseUrl = "https://lrhgwpbsujkkuouyhcli.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxyaGd3cGJzdWpra3VvdXloY2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MjA1MzEsImV4cCI6MjA5MjM5NjUzMX0.dcfTopdcsFUeQ0tSk246DiWnKLG5ndEX7GlAap5rPFw";
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+</script>
+<script>
+  /* ===== UTILS ===== */
+  function $(id) { return document.getElementById(id); }
+
+  function showToast(msg, type = '') {
+    const t = $('toast');
+    t.textContent = msg;
+    t.className = 'show ' + type;
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.className = ''; }, 3200);
+  }
+
+  function showErr(id, show) {
+    const el = $(id);
+    if (el) el.classList.toggle('visible', show);
+  }
+
+  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+  /* ===== TAB SWITCH ===== */
+  function switchTab(tab) {
+    $('tab-login').classList.toggle('active', tab === 'login');
+    $('tab-cadastro').classList.toggle('active', tab === 'cadastro');
+    $('panel-login').classList.toggle('active', tab === 'login');
+    $('panel-cadastro').classList.toggle('active', tab === 'cadastro');
+    $('tab-login').setAttribute('aria-selected', tab === 'login');
+    $('tab-cadastro').setAttribute('aria-selected', tab === 'cadastro');
+  }
+
+  /* ===== PW TOGGLE ===== */
+  function togglePw(inputId, btn) {
+    const inp = $(inputId);
+    const isText = inp.type === 'text';
+    inp.type = isText ? 'password' : 'text';
+    btn.innerHTML = isText
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+    btn.style.color = isText ? '' : 'var(--teal)';
+  }
+
+  /* ===== PW STRENGTH ===== */
+  function checkPwStrength(val) {
+    const wrap = $('pw-strength-wrap');
+    const label = $('pw-strength-label');
+    const bars = ['bar1','bar2','bar3','bar4'];
+    if (!val) { wrap.style.display = 'none'; return; }
+    wrap.style.display = 'flex';
+    let score = 0;
+    if (val.length >= 6) score++;
+    if (val.length >= 10) score++;
+    if (/[A-Z]/.test(val) && /[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+    const colors = ['#CC0000','#e07c00','#F5C800','#3DAA6B'];
+    const labels = ['Fraca','Razoável','Boa','Forte'];
+    bars.forEach((id, i) => {
+      $(id).style.background = i < score ? colors[score - 1] : 'var(--border)';
+    });
+    label.textContent = labels[score - 1] || '';
+    label.style.color = score > 0 ? colors[score - 1] : 'var(--gray)';
+  }
+
+  /* ===== LOGIN ===== */
+  async function supabaseFindUser(email) {
+    if (!window.supabase) return null;
+    const { data, error } = await supabase.from('jebai_users').select('*').eq('email', email).maybeSingle();
+    if (error) { console.warn('Supabase select:', error.message); return null; }
+    return data;
+  }
+  async function supabaseInsertUser(user) {
+    if (!window.supabase) return;
+    const { error } = await supabase.from('jebai_users').insert([user]);
+    if (error) console.warn('Supabase insert:', error.message);
+  }
+  async function supabaseUpdateUser(email, updates) {
+    if (!window.supabase) return;
+    const { error } = await supabase.from('jebai_users').update(updates).eq('email', email);
+    if (error) console.warn('Supabase update:', error.message);
+  }
+  function saveLocalUser(user) {
+    const users = JSON.parse(localStorage.getItem('jebai_users') || '[]');
+    const idx = users.findIndex(u => u.email === user.email);
+    if (idx >= 0) users[idx] = { ...users[idx], ...user };
+    else users.push(user);
+    localStorage.setItem('jebai_users', JSON.stringify(users));
+  }
+  async function checkUserCredential(user, senha) {
+    if (!user) return false;
+    if (user.senhaVersion === 2 && user.senhaHash && user.senhaSalt) {
+      return JebaiAuth.verifyUserPassword(senha, user.senhaSalt, user.senhaHash);
+    }
+    // Esquema antigo: senha em texto puro. Aceita uma vez para permitir migração.
+    if (user.senha && user.senha === senha) return 'legacy';
+    return false;
+  }
+  async function migrateLegacyUser(user, senha) {
+    const cred = await JebaiAuth.hashUserPassword(senha);
+    const updates = { senhaHash: cred.hash, senhaSalt: cred.salt, senhaVersion: cred.version, senha: null };
+    await supabaseUpdateUser(user.email, updates);
+    const merged = { ...user, ...updates };
+    saveLocalUser(merged);
+    return merged;
+  }
+  async function handleLogin() {
+    const email = $('login-email').value.trim().toLowerCase();
+    const senha = $('login-senha').value;
+    let ok = true;
+    if (!isEmail(email)) { showErr('login-email-err', true); ok = false; } else { showErr('login-email-err', false); }
+    if (senha.length < 6) { showErr('login-senha-err', true); ok = false; } else { showErr('login-senha-err', false); }
+    if (!ok) return;
+    const btn = $('btn-login'); btn.disabled = true; btn.textContent = 'Entrando…';
+    try {
+      let user = await supabaseFindUser(email);
+      if (!user) {
+        const users = JSON.parse(localStorage.getItem('jebai_users') || '[]');
+        user = users.find(u => u.email === email);
+      }
+      const result = await checkUserCredential(user, senha);
+      if (result) {
+        if (result === 'legacy') user = await migrateLegacyUser(user, senha);
+        else saveLocalUser(user);
+        localStorage.setItem('jebai_logged', JSON.stringify({ nome: user.nome, email: user.email }));
+        showToast('✓ Bem-vindo de volta, ' + user.nome + '!', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      } else showToast('E-mail ou senha incorretos.', 'error');
+    } catch(e) { console.error(e); showToast('Erro ao conectar com o Supabase.', 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Entrar na Minha Conta'; }
+  }
+
+  /* ===== CADASTRO ===== */
+  async function handleCadastro() {
+    const nome = $('cad-nome').value.trim();
+    const sobrenome = $('cad-sobrenome').value.trim();
+    const email = $('cad-email').value.trim().toLowerCase();
+    const senha = $('cad-senha').value;
+    const confirma = $('cad-confirma').value;
+    const terms = $('cad-terms').checked;
+    let ok = true;
+    showErr('cad-nome-err', !nome); if (!nome) ok = false;
+    showErr('cad-sobrenome-err', !sobrenome); if (!sobrenome) ok = false;
+    if (!isEmail(email)) { showErr('cad-email-err', true); ok = false; } else { showErr('cad-email-err', false); }
+    if (senha.length < 6) { showErr('cad-senha-err', true); ok = false; } else { showErr('cad-senha-err', false); }
+    if (senha !== confirma) { showErr('cad-confirma-err', true); ok = false; } else { showErr('cad-confirma-err', false); }
+    showErr('cad-terms-err', !terms); if (!terms) ok = false;
+    if (!ok) return;
+    const btn = $('btn-cadastro'); btn.disabled = true; btn.textContent = 'Criando conta…';
+    try {
+      const existing = await supabaseFindUser(email);
+      const localUsers = JSON.parse(localStorage.getItem('jebai_users') || '[]');
+      if (existing || localUsers.find(u => u.email === email)) { showToast('Este e-mail já está cadastrado.', 'error'); return; }
+      const cred = await JebaiAuth.hashUserPassword(senha);
+      const user = { nome, sobrenome, email, senhaHash: cred.hash, senhaSalt: cred.salt, senhaVersion: cred.version, createdAt: new Date().toISOString(), origem: 'Cadastro do site' };
+      await supabaseInsertUser(user);
+      saveLocalUser(user);
+      localStorage.setItem('jebai_logged', JSON.stringify({ nome, email }));
+      showToast('✓ Conta criada com sucesso! Bem-vindo, ' + nome + '!', 'success');
+      setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+    } catch(e) { console.error(e); showToast('Erro ao criar conta no Supabase.', 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Criar Minha Conta'; }
+  }
+
+  /* ===== FORGOT ===== */
+  function openForgot() { $('forgotModal').classList.add('active'); $('forgot-email').focus(); }
+  function closeForgot() { $('forgotModal').classList.remove('active'); }
+  async function handleForgot() {
+    // Sem backend de e-mail real, redefinir senha pelo navegador permitiria que qualquer
+    // pessoa trocasse a senha de qualquer cliente. Encaminha para atendimento humano.
+    showToast('Para recuperar a senha, fale com nosso atendimento pelo WhatsApp.', 'error');
+    setTimeout(() => { window.open('https://wa.me/554530257567', '_blank', 'noopener,noreferrer'); }, 600);
+    closeForgot();
+  }
+  $('forgotModal').addEventListener('click', (e) => { if (e.target === $('forgotModal')) closeForgot(); });
+
+
+
+  /* ===== MINHA CONTA ===== */
+  function getLoggedUser() {
+    try { return JSON.parse(localStorage.getItem('jebai_logged') || 'null'); } catch(e) { return null; }
+  }
+  function getUsers() {
+    return JSON.parse(localStorage.getItem('jebai_users') || '[]');
+  }
+  function setUsers(users) {
+    localStorage.setItem('jebai_users', JSON.stringify(users));
+  }
+  function initials(nome) {
+    const parts = (nome || 'JC').trim().split(' ');
+    return parts.length > 1 ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase() : parts[0].slice(0,2).toUpperCase();
+  }
+  function loadAccountPage() {
+    const logged = getLoggedUser();
+    const pageMain = document.querySelector('.page-main');
+    const accountPage = $('accountPage');
+    if (!logged) {
+      pageMain.style.display = 'flex';
+      accountPage.classList.remove('active');
+      return;
+    }
+    const users = getUsers();
+    const user = users.find(u => u.email === logged.email) || logged;
+    pageMain.style.display = 'none';
+    accountPage.classList.add('active');
+    $('accountAvatar').textContent = initials((user.nome || '') + ' ' + (user.sobrenome || ''));
+    $('acc-nome').value = user.nome || '';
+    $('acc-sobrenome').value = user.sobrenome || '';
+    $('acc-email').value = user.email || '';
+    $('acc-telefone').value = user.telefone || '';
+    $('acc-rec-email').value = user.email || '';
+    if (location.hash === '#recuperar-senha') switchAccountTab('recuperar');
+    else switchAccountTab('dados');
+  }
+  function switchAccountTab(tab) {
+    document.querySelectorAll('.account-section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('[data-account-tab]').forEach(btn => btn.classList.remove('active'));
+    const section = $('account-' + tab);
+    const btn = document.querySelector('[data-account-tab="' + tab + '"]');
+    if (section) section.classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+  function saveAccountData() {
+    const logged = getLoggedUser();
+    if (!logged) return;
+    const nome = $('acc-nome').value.trim();
+    const sobrenome = $('acc-sobrenome').value.trim();
+    const email = $('acc-email').value.trim().toLowerCase();
+    const telefone = $('acc-telefone').value.trim();
+    if (!nome || !sobrenome || !isEmail(email)) { showToast('Preencha nome, sobrenome e e-mail corretamente.', 'error'); return; }
+    const users = getUsers();
+    const idx = users.findIndex(u => u.email === logged.email);
+    const duplicate = users.some((u, i) => u.email === email && i !== idx);
+    if (duplicate) { showToast('Este e-mail já está em outra conta.', 'error'); return; }
+    if (idx >= 0) users[idx] = { ...users[idx], nome, sobrenome, email, telefone };
+    else users.push({ nome, sobrenome, email, telefone, senha: '', createdAt: new Date().toISOString(), origem: 'Minha Conta' });
+    setUsers(users);
+    localStorage.setItem('jebai_logged', JSON.stringify({ nome, email }));
+    showToast('✓ Dados atualizados com sucesso!', 'success');
+    loadAccountPage();
+  }
+  async function changeAccountPassword() {
+    const logged = getLoggedUser();
+    if (!logged) return;
+    const atual = $('acc-senha-atual').value;
+    const nova = $('acc-nova-senha').value;
+    const confirma = $('acc-confirma-senha').value;
+    const users = getUsers();
+    const idx = users.findIndex(u => u.email === logged.email);
+    if (idx === -1) { showToast('Sessão expirada. Faça login novamente.', 'error'); return; }
+    const user = users[idx];
+    const valid = await checkUserCredential(user, atual);
+    if (!valid) { showToast('Senha atual incorreta.', 'error'); return; }
+    if (nova.length < 6) { showToast('A nova senha deve ter pelo menos 6 caracteres.', 'error'); return; }
+    if (nova !== confirma) { showToast('As senhas não coincidem.', 'error'); return; }
+    const cred = await JebaiAuth.hashUserPassword(nova);
+    users[idx] = { ...user, senhaHash: cred.hash, senhaSalt: cred.salt, senhaVersion: cred.version, senha: null };
+    setUsers(users);
+    await supabaseUpdateUser(user.email, { senhaHash: cred.hash, senhaSalt: cred.salt, senhaVersion: cred.version, senha: null });
+    $('acc-senha-atual').value = ''; $('acc-nova-senha').value = ''; $('acc-confirma-senha').value = '';
+    showToast('✓ Senha alterada com sucesso!', 'success');
+  }
+  function recoverAccountPassword() {
+    // Mesma razão de handleForgot: sem e-mail real, qualquer um redefiniria a senha alheia.
+    showToast('Para recuperar a senha, fale com nosso atendimento pelo WhatsApp.', 'error');
+    setTimeout(() => { window.open('https://wa.me/554530257567', '_blank', 'noopener,noreferrer'); }, 600);
+  }
+  function logoutAccount() {
+    localStorage.removeItem('jebai_logged');
+    showToast('Você saiu da conta.', 'success');
+    setTimeout(() => location.href = 'login.html', 700);
+  }
+  document.addEventListener('DOMContentLoaded', loadAccountPage);
+
+  /* ===== Social Login (demo) ===== */
+  function socialLogin(provider) {
+    showToast('Redirecionando para ' + provider + '…');
+  }
+
+  /* ===== Enter key support ===== */
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    if ($('panel-login').classList.contains('active')) handleLogin();
+    else if ($('panel-cadastro').classList.contains('active')) handleCadastro();
+  });
+</script>
+<script src="dashboard-tracker.js"></script>
+</body>
+</html>
