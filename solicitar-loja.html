@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://gsqcqpcliqbzmzkwpnxf.supabase.co wss://gsqcqpcliqbzmzkwpnxf.supabase.co; form-action 'self'; upgrade-insecure-requests">
+<title>Quero ser lojista — Jebai Center</title>
+<link rel="preconnect" href="https://gsqcqpcliqbzmzkwpnxf.supabase.co" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--yellow:#F5C800;--teal:#20b2ad;--teal-dark:#159892;--green:#3DAA6B;--dark:#222;--gray:#666;--muted:#888;--border:#e8e8e8;--red:#cc0000;--bg:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Open Sans',Arial,sans-serif;background:var(--bg);color:var(--dark);font-size:15px;min-height:100vh;display:flex;flex-direction:column}
+a{text-decoration:none;color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.topbar-inner{max-width:1100px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Montserrat,Arial,sans-serif;font-weight:900}
+.brand-mark{width:34px;height:34px;border-radius:12px;background:var(--yellow);display:grid;place-items:center;font-weight:900}
+.back-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:10px 14px;border-radius:999px;font-weight:800;background:#fff;transition:.2s}
+.back-btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(0,0,0,.08)}
+main{flex:1;max-width:780px;margin:0 auto;padding:42px 20px 60px;width:100%}
+.page-hero{background:linear-gradient(135deg,#20b2ad 0%,#3DAA6B 100%);color:#fff;border-radius:28px;padding:38px 34px;margin-bottom:28px;position:relative;overflow:hidden}
+.page-hero:before{content:'';position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.12)}
+.eyebrow{font-family:Montserrat,Arial,sans-serif;font-weight:900;text-transform:uppercase;font-size:12px;letter-spacing:.8px;margin-bottom:10px;opacity:.92}
+.page-hero h1{font-family:Montserrat,Arial,sans-serif;font-size:clamp(28px,5vw,42px);line-height:1.1;margin-bottom:10px}
+.page-hero p{max-width:580px;line-height:1.6;opacity:.95}
+.card{background:#fff;border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 14px 35px rgba(0,0,0,.06)}
+.card h2{font-family:Montserrat,Arial,sans-serif;font-size:22px;margin-bottom:6px}
+.card p.muted{color:var(--muted);font-size:14px;margin-bottom:18px}
+.form-grid{display:grid;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{display:block;font-weight:800;margin-bottom:7px;font-size:14px}
+.field input,.field textarea{width:100%;border:1px solid #d9d9d9;border-radius:14px;padding:13px 14px;font:inherit;outline:none;transition:.18s;background:#fff}
+.field textarea{min-height:110px;resize:vertical;font-family:inherit}
+.field input:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(32,178,173,.12)}
+.field input[readonly]{background:#f5f7fb;color:var(--gray)}
+.field-error{display:none;color:var(--red);font-weight:700;font-size:12px;margin-top:5px}
+.field-error.show{display:block}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.btn{border:none;border-radius:999px;padding:13px 22px;font-weight:900;cursor:pointer;font-family:Montserrat,Arial,sans-serif;transition:.2s;font-size:14px}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--teal-dark);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-secondary{background:#f1f1f1;color:#222}
+.notice{background:#fff8db;border:1px solid #ffe58a;border-radius:16px;padding:14px 16px;margin-bottom:18px;color:#6a5300;line-height:1.5;font-size:14px}
+.notice strong{color:#5a4400}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;background:#111827;color:#fff;border-radius:999px;padding:13px 20px;font-weight:800;z-index:99;transition:.25s;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.error{background:#b42318}
+.toast.success{background:#137547}
+.status-card{background:#fff;border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:0 14px 35px rgba(0,0,0,.06);text-align:center}
+.status-card .status-icon{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:0 auto 14px}
+.status-card.pending .status-icon{background:#fff4e5;color:#b54708}
+.status-card.approved .status-icon{background:#eafaf2;color:#137547}
+.status-card.rejected .status-icon{background:#fff1f1;color:#b42318}
+.status-card h2{font-family:Montserrat,Arial,sans-serif;font-size:22px;margin-bottom:8px}
+.status-card p{color:var(--gray);line-height:1.55;margin-bottom:14px}
+.status-card .meta{font-size:13px;color:var(--muted);margin-top:14px}
+.loading{text-align:center;padding:60px 20px;color:var(--muted)}
+.login-prompt{text-align:center;padding:60px 30px}
+.login-prompt h2{font-family:Montserrat,Arial,sans-serif;font-size:24px;margin-bottom:10px}
+.login-prompt p{color:var(--gray);line-height:1.55;margin-bottom:22px;max-width:420px;margin-left:auto;margin-right:auto}
+@media(max-width:680px){.form-row{grid-template-columns:1fr}.page-hero{padding:30px 22px}.card{padding:22px}main{padding:24px 14px 50px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">J</span>
+      <span>Jebai Center</span>
+    </a>
+    <a class="back-btn" href="index.html">← Voltar</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="eyebrow">Para lojistas</div>
+    <h1>Quero ser lojista no Jebai Center</h1>
+    <p>Preencha os dados da sua loja. Após nossa aprovação, você terá um painel exclusivo para criar e personalizar sua página dentro do site.</p>
+  </section>
+
+  <div id="loading" class="loading">Carregando…</div>
+
+  <!-- Tela de "precisa logar" -->
+  <section class="card login-prompt" id="loginPrompt" style="display:none">
+    <h2>Faça login para continuar</h2>
+    <p>Para solicitar uma loja você precisa estar logado. Se ainda não tem conta, cadastre-se primeiro — leva menos de 1 minuto.</p>
+    <div class="actions" style="justify-content:center">
+      <a class="btn btn-primary" href="login.html">Entrar ou cadastrar</a>
+      <a class="btn btn-secondary" href="index.html">Voltar para o site</a>
+    </div>
+  </section>
+
+  <!-- Tela de status (já existe pedido pendente / aprovado / rejeitado) -->
+  <section id="statusArea" style="display:none"></section>
+
+  <!-- Formulário de solicitação -->
+  <section class="card" id="formArea" style="display:none">
+    <h2>Dados da sua loja</h2>
+    <p class="muted">Esses dados serão usados na análise. Você poderá editar tudo depois, quando criar a página da loja.</p>
+
+    <div class="notice">
+      <strong>Como funciona:</strong> você envia o pedido → nossa equipe analisa → quando aprovado, sua conta vira <strong>vendedor</strong> e você acessa o painel para construir a loja. Não cobramos pelo cadastro.
+    </div>
+
+    <div class="form-grid">
+      <div class="form-row">
+        <div class="field">
+          <label for="nome_solicitante">Seu nome completo</label>
+          <input id="nome_solicitante" type="text" autocomplete="name" required>
+          <div class="field-error" id="err-nome">Informe seu nome.</div>
+        </div>
+        <div class="field">
+          <label for="email">E-mail (da sua conta)</label>
+          <input id="email" type="email" readonly>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" type="tel" placeholder="(00) 00000-0000" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp</label>
+          <input id="whatsapp" type="tel" placeholder="(00) 00000-0000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="nome_loja">Nome da loja *</label>
+        <input id="nome_loja" type="text" placeholder="Ex: Eletrônicos do Zé" required>
+        <div class="field-error" id="err-loja">Informe o nome da loja.</div>
+      </div>
+
+      <div class="field">
+        <label for="instagram">Instagram da loja (opcional)</label>
+        <input id="instagram" type="text" placeholder="@sualoja">
+      </div>
+
+      <div class="field">
+        <label for="descricao">Conte um pouco sobre a sua loja *</label>
+        <textarea id="descricao" placeholder="O que você vende, há quanto tempo está no mercado, diferenciais, etc."></textarea>
+        <div class="field-error" id="err-desc">Escreva uma breve descrição da loja.</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="submitBtn" type="button">Enviar solicitação</button>
+        <a class="btn btn-secondary" href="index.html">Cancelar</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast">Pronto</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+<script src="auth-utils.js"></script>
+<script src="solicitar-loja.js"></script>
+</body>
+</html>

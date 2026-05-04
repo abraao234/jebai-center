@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Segurança básica para publicação online -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline'; connect-src 'self' https://www.tcheloco.com.py https://api.allorigins.win https://api.codetabs.com; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Tchê Loco Electrônicos — Jebai Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --yellow: #F5C800;
+    --yellow-dark: #e0b400;
+    --green: #3DAA6B;
+    --green-dark: #2e8e58;
+    --red: #CC0000;
+    --dark: #222222;
+    --gray: #555555;
+    --light-gray: #ffffff;
+    --border: #e0e0e0;
+    --white: #ffffff;
+    --brand: #c0392b;
+  }
+  body { font-family: 'Open Sans', sans-serif; color: var(--dark); background: #ffffff; font-size: 14px; }
+  a { text-decoration: none; color: inherit; }
+
+  /* HEADER */
+  header { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .logo-header { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor:pointer; }
+  .logo-header .logo-icon { width: 38px; height: 44px; display: flex; align-items: center; justify-content: center; }
+  .logo-header small { font-size: 9px; font-family: 'Montserrat', sans-serif; font-weight: 600; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+  .back-btn { display:inline-flex; align-items:center; gap:8px; background:#ffffff; border:1px solid var(--border); color:var(--dark); font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; padding:8px 16px; border-radius:6px; transition:background 0.2s; cursor:pointer; }
+  .back-btn:hover { background:var(--border); }
+  .header-icons { display:flex; gap:14px; align-items:center; }
+  .icon-svg { width:20px; height:20px; fill:var(--gray); }
+  .whatsapp-contact { position:relative; display:inline-flex; }
+  .whatsapp-contact summary { list-style:none; display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; cursor:pointer; transition:background .2s, transform .2s; }
+  .whatsapp-contact summary::-webkit-details-marker { display:none; }
+  .whatsapp-contact summary:hover { background:rgba(37,211,102,.12); transform:translateY(-1px); }
+  .whatsapp-contact[open] summary { background:rgba(37,211,102,.14); }
+  .whatsapp-contact .icon-svg { width:24px; height:24px; stroke:#25D366; }
+  .whatsapp-menu { position:absolute; top:46px; right:0; width:250px; background:#fff; border:1px solid var(--border); border-radius:14px; box-shadow:0 14px 35px rgba(0,0,0,.16); padding:8px; z-index:300; }
+  .whatsapp-menu::before { content:''; position:absolute; top:-7px; right:14px; width:12px; height:12px; background:#fff; border-left:1px solid var(--border); border-top:1px solid var(--border); transform:rotate(45deg); }
+  .whatsapp-option { display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:10px; font-family:'Montserrat',sans-serif; transition:background .2s; }
+  .whatsapp-option:hover { background:#f5fff8; }
+  .whatsapp-option strong { display:block; color:var(--dark); font-size:12px; line-height:1.2; }
+  .whatsapp-option span { display:block; color:var(--gray); font-size:11px; margin-top:2px; }
+  .whatsapp-badge { width:28px; height:28px; border-radius:50%; background:#25D366; color:#fff; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; }
+
+  /* STORE HERO */
+  .store-hero { 
+    background: #ffffff;
+    padding: 18px 0 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .store-hero-inner { max-width: 1600px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+  .breadcrumb { display:flex; align-items:center; gap:8px; margin-bottom:22px; font-size:12px; color:rgba(34,34,34,0.7); font-family:'Montserrat',sans-serif; }
+  .breadcrumb a { color:rgba(34,34,34,0.7); } .breadcrumb a:hover { color:var(--brand); }
+  .breadcrumb span { color:rgba(34,34,34,0.38); }
+  .store-hero-content { display:block; }
+  .custom-hero-banner {
+    width: 100%;
+    max-width: 1540px;
+    margin: 0 auto;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.14);
+    border: none;
+    background: transparent;
+  }
+  .custom-hero-banner,
+  .promo-card-image {
+    position: relative;
+  }
+  .banner-image-hotspot-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+  .banner-buy-hotspot {
+    position: absolute;
+    left: 61%;
+    top: 73%;
+    width: 12%;
+    height: 8%;
+    border-radius: 999px;
+    z-index: 5;
+    cursor: pointer;
+    display: block;
+  }
+  .banner-buy-hotspot:focus-visible {
+    outline: 3px solid rgba(255,255,255,0.9);
+    outline-offset: 3px;
+  }
+
+  .custom-hero-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  .banner-store-link {
+    display: block;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+  }
+  .banner-store-link:focus-visible {
+    outline: 3px solid rgba(44, 184, 175, 0.85);
+    outline-offset: 4px;
+    border-radius: inherit;
+  }
+  .hero-circles { display:none; }
+
+  /* STATS BAR */
+  .stats-bar { background:#fff; border-bottom:1px solid var(--border); padding:20px 0; }
+  .stats-inner { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; gap:0; }
+  .stat-item { flex:1; text-align:center; border-right:1px solid var(--border); padding:0 20px; }
+  .stat-item:last-child { border-right:none; }
+  .stat-num { font-family:'Montserrat',sans-serif; font-weight:900; font-size:24px; color:var(--brand); }
+  .stat-label { font-size:11px; color:var(--gray); margin-top:2px; }
+
+  /* PRODUCTS */
+  .section { padding:48px 0; }
+  .section.bg-gray { background:#ffffff; }
+  .section-inner { max-width:1200px; margin:0 auto; padding:0 20px; }
+  .section-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:22px; color:var(--dark); margin-bottom:28px; display:flex; align-items:center; gap:12px; }
+  .section-title::after { content:''; flex:1; height:2px; background:var(--border); border-radius:2px; }
+  .section-title span { color:var(--brand); }
+
+  .products-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .product-card { border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; transition:box-shadow 0.2s, transform 0.2s; cursor:pointer; }
+  .product-card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.12); transform:translateY(-3px); }
+  .product-img { height:150px; display:flex; align-items:center; justify-content:center; }
+  .product-info { padding:14px; }
+  .product-name { font-family:'Montserrat',sans-serif; font-weight:700; font-size:13px; color:var(--dark); margin-bottom:4px; line-height:1.4; }
+  .product-desc { font-size:11px; color:var(--gray); margin-bottom:12px; line-height:1.5; }
+  .product-price { font-family:'Montserrat',sans-serif; font-weight:900; font-size:18px; color:var(--brand); margin-bottom:10px; }
+  .product-price small { font-size:11px; font-weight:600; color:var(--gray); display:block; margin-top:2px; }
+  .btn-buy { display:block; width:100%; text-align:center; background:var(--green); color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; padding:9px; border-radius:6px; transition:background 0.2s; }
+  .btn-buy:hover { background:var(--green-dark); }
+
+  /* INFO SECTION */
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .info-card { background:#fff; border:1px solid var(--border); border-radius:12px; padding:28px; }
+  .info-card h3 { font-family:'Montserrat',sans-serif; font-weight:800; font-size:16px; color:var(--dark); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .info-card h3 .icon-circle { width:32px; height:32px; background:var(--brand); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .info-card p, .info-card li { font-size:13px; color:var(--gray); line-height:1.7; }
+  .info-card ul { list-style:none; padding:0; }
+  .info-card ul li { padding:6px 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+  .info-card ul li:last-child { border-bottom:none; }
+  .info-card ul li::before { content:'✓'; color:var(--green); font-weight:700; }
+
+  /* CTA */
+  .cta-section { background:var(--brand); padding:60px 20px; text-align:center; }
+  .cta-inner { max-width:600px; margin:0 auto; }
+  .cta-section h2 { font-family:'Montserrat',sans-serif; font-weight:900; font-size:28px; color:#fff; margin-bottom:12px; }
+  .cta-section p { color:rgba(255,255,255,0.85); margin-bottom:28px; line-height:1.6; }
+  .cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  .btn-whatsapp { display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; padding:12px 28px; border-radius:8px; transition:opacity 0.2s; }
+  .btn-whatsapp:hover { opacity:0.9; }
+  .btn-white { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.2); color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; padding:12px 28px; border-radius:8px; border:1px solid rgba(255,255,255,0.4); transition:background 0.2s; }
+  .btn-white:hover { background:rgba(255,255,255,0.3); }
+
+  /* FOOTER */
+  footer { background:#1a1a1a; color:#fff; padding:40px 0 20px; }
+  .footer-inner { max-width:1200px; margin:0 auto; padding:0 20px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+  .footer-logo-icon { width:44px; height:44px; background:var(--yellow); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; font-weight:900; font-size:22px; color:#fff; }
+  .footer-brand { font-family:'Montserrat',sans-serif; font-weight:800; font-size:13px; letter-spacing:1px; margin-top:6px; }
+  .footer-links { display:flex; gap:24px; }
+  .footer-links a { color:rgba(255,255,255,0.6); font-size:12px; transition:color 0.2s; } .footer-links a:hover { color:#fff; }
+  .footer-bottom { text-align:center; margin-top:32px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1); font-size:11px; color:rgba(255,255,255,0.35); }
+  ::-webkit-scrollbar { width:6px; } ::-webkit-scrollbar-track { background:#f1f1f1; } ::-webkit-scrollbar-thumb { background:var(--yellow); border-radius:3px; }
+
+  .filters-wrap { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+  .filter-chip { border:1px solid var(--border); background:#fff; color:var(--gray); border-radius:999px; padding:8px 14px; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; }
+  .filter-chip:hover { border-color:var(--brand); color:var(--brand); }
+  .filter-chip.active { background:var(--brand); border-color:var(--brand); color:#fff; box-shadow:0 6px 18px rgba(192,57,43,0.18); }
+  .toolbar-note { font-size:12px; color:var(--gray); }
+  .product-meta { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .meta-pill { font-size:10px; font-weight:700; color:var(--brand); background:rgba(192,57,43,0.08); border:1px solid rgba(192,57,43,0.12); border-radius:999px; padding:4px 8px; font-family:'Montserrat',sans-serif; text-transform:uppercase; letter-spacing:0.4px; }
+
+  .info-intro-card { margin-bottom:24px; padding:24px; background:#fff; border:1px solid var(--border); border-radius:12px; font-size:13.5px; color:var(--gray); line-height:1.8; }
+  .info-card-wide { grid-column: 1 / -1; }
+  .store-about-layout { display:grid; grid-template-columns:1.1fr 0.9fr; gap:24px; align-items:center; }
+  .store-about-text p + p { margin-top:12px; }
+  .store-about-banner { background:linear-gradient(180deg, #fff7f7 0%, #fff 100%); border:1px solid #f1d7d5; border-radius:16px; padding:14px; box-shadow:0 10px 24px rgba(192,57,43,0.08); }
+  .store-about-banner img { display:block; width:100%; height:auto; border-radius:12px; object-fit:cover; }
+  .feed-summary { display:grid; grid-template-columns:1.1fr 0.9fr; gap:24px; margin-bottom:28px; }
+  .feed-box { background:#fff; border:1px solid var(--border); border-radius:12px; padding:22px; }
+  .feed-box h3 { font-family:'Montserrat',sans-serif; font-size:15px; font-weight:800; margin-bottom:10px; }
+  .feed-box p { font-size:13px; color:var(--gray); line-height:1.7; }
+  .mini-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .mini-list span { background:#ffffff; border-radius:999px; padding:6px 10px; font-size:11px; color:var(--dark); font-weight:700; font-family:'Montserrat',sans-serif; }
+  .error-box { background:#fff4f4; color:#a83232; border:1px solid #f0c2c2; border-radius:12px; padding:18px; text-align:center; }
+  @media (max-width: 980px) {
+    .products-grid { grid-template-columns:repeat(3,1fr); }
+    .feed-summary, .info-grid, .store-about-layout { grid-template-columns:1fr; }
+    .stats-inner { flex-wrap:wrap; }
+    .stat-item { min-width:50%; padding:14px 20px; border-right:none; border-bottom:1px solid var(--border); }
+    .stat-item:nth-last-child(-n+2) { border-bottom:none; }
+    .info-card-wide { grid-column:auto; }
+  }
+  @media (max-width: 720px) {
+    .products-grid { grid-template-columns:repeat(2,1fr); }
+    .header-inner { gap:12px; }
+  }
+  @media (max-width: 520px) {
+    .products-grid { grid-template-columns:1fr; }
+    .section-title { font-size:18px; }
+  }
+
+
+  /* PRINT-STYLE STORE SECTION */
+  .print-area { background:#ffffff; padding:0 0 28px; }
+  .print-wrap { max-width:1020px; margin:0 auto; }
+  .print-block { padding:56px 22px; }
+  .print-block + .print-block { border-top:1px solid rgba(0,0,0,0.04); }
+  .about-card-ref { display:grid; grid-template-columns:1.05fr 1fr; gap:20px; align-items:center; }
+  .about-card-ref .about-media { background:transparent; border-radius:16px; overflow:hidden; min-height:auto; box-shadow:0 8px 20px rgba(0,0,0,0.08); display:flex; align-items:center; }
+  .about-card-ref .about-media img { width:100%; height:auto; object-fit:contain; display:block; border-radius:16px; }
+  .about-copy-ref h2, .contact-title-ref { font-family:'Montserrat',sans-serif; font-size:28px; font-weight:800; color:#111; margin-bottom:10px; }
+  .yellow-line { width:62px; height:4px; border-radius:999px; background:#e8c54b; margin-bottom:36px; }
+  .about-copy-ref p { font-size:14px; line-height:1.45; color:#6a6a6a; max-width:430px; margin-bottom:14px; }
+  .about-actions-ref { display:flex; gap:18px; flex-wrap:wrap; margin-top:28px; }
+  .btn-ref { min-width:146px; text-align:center; padding:14px 24px; border-radius:999px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; transition:all .2s; }
+  .btn-ref.primary { background:#2cb8af; color:#fff; }
+  .btn-ref.primary:hover { background:#23a59d; }
+  .btn-ref.secondary { border:1.5px solid #2cb8af; color:#2cb8af; background:transparent; }
+  .btn-ref.secondary:hover { background:#2cb8af; color:#fff; }
+
+  .contact-center-ref { text-align:center; }
+  .contact-title-ref { margin-bottom:8px; }
+  .contact-list-ref { margin-top:34px; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .contact-item-ref { display:flex; align-items:center; justify-content:center; gap:10px; color:#6e6e6e; font-size:14px; line-height:1.35; }
+  .contact-item-ref svg { flex:0 0 auto; }
+
+  .promo-card-ref { position:relative; display:grid; grid-template-columns:1.15fr 0.85fr; overflow:hidden; border-radius:18px; background:linear-gradient(135deg,#b40000 0%,#ff3131 78%); min-height:285px; box-shadow:0 10px 24px rgba(0,0,0,0.08); }
+  .promo-left-ref { position:relative; min-height:285px; background:linear-gradient(135deg,#8f0000 0%,#d91417 70%); }
+  .promo-left-ref::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 20% 35%, rgba(255,255,255,.12) 0 2px, transparent 3px), radial-gradient(circle at 18% 36%, rgba(255,255,255,.10) 0 130px, transparent 132px); opacity:.45; }
+  .promo-logo-ref { position:absolute; left:36px; bottom:34px; width:min(72%, 360px); border-radius:14px; }
+  .watch-ref { position:absolute; left:56%; top:50%; transform:translate(-50%,-54%) rotate(-6deg); width:220px; height:220px; filter:drop-shadow(0 18px 18px rgba(0,0,0,.35)); }
+  .watch-ref .strap-top, .watch-ref .strap-bottom { position:absolute; left:50%; transform:translateX(-50%); width:74px; background:#151515; border-radius:28px; }
+  .watch-ref .strap-top { top:0; height:82px; }
+  .watch-ref .strap-bottom { bottom:0; height:82px; }
+  .watch-ref .case { position:absolute; inset:42px; border-radius:50%; background:radial-gradient(circle at 35% 32%, #ffffff 0%, #dadada 30%, #777 58%, #1f1f1f 76%, #0f0f0f 100%); border:10px solid #2b2b2b; }
+  .watch-ref .dial { position:absolute; inset:58px; border-radius:50%; background:radial-gradient(circle at 38% 30%, #ffffff 0%, #f3f3f3 42%, #d91c1c 43%, #2a2a2a 46%, #161616 100%); box-shadow:inset 0 0 0 4px rgba(255,255,255,.18); }
+  .watch-ref .dial::before { content:'08'; position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); font-family:'Montserrat',sans-serif; font-size:52px; font-weight:800; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.35); }
+  .watch-ref .dial::after { content:''; position:absolute; inset:18px; border:3px solid rgba(255,255,255,.12); border-radius:50%; }
+  .promo-copy-ref { position:relative; z-index:2; padding:38px 36px; color:#fff; }
+  .promo-copy-ref .small { font-size:16px; font-weight:600; margin-bottom:2px; }
+  .promo-copy-ref h3 { font-family:'Montserrat',sans-serif; font-size:34px; line-height:1.05; font-weight:800; margin-bottom:18px; }
+  .promo-copy-ref p { font-size:12px; line-height:1.5; max-width:320px; }
+  .promo-copy-ref .buy-btn { display:inline-block; margin-top:18px; background:#111; color:#fff; padding:9px 20px; border-radius:999px; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; }
+  .promo-card-image { display:block; grid-template-columns:none; min-height:auto; background:#ffffff; }
+  .promo-banner-custom { display:block; width:100%; height:auto; border-radius:18px; }
+
+  .footer-ref { background:#ffffff; }
+  .footer-ref-main { max-width:1020px; margin:0 auto; padding:38px 22px 22px; display:grid; grid-template-columns:1fr auto 1fr; align-items:start; gap:24px; color:#666; }
+  .footer-ref h4 { color:#2cb8af; font-family:'Montserrat',sans-serif; font-size:17px; font-weight:700; margin-bottom:10px; }
+  .footer-ref a, .footer-ref p, .footer-ref li { color:#666; font-size:14px; line-height:1.45; }
+  .footer-ref ul { list-style:none; padding:0; }
+  .footer-ref-center { text-align:center; }
+  .footer-ref-center .socials { display:flex; justify-content:center; gap:16px; margin-top:12px; }
+  .footer-ref-center .socials a { color:#2cb8af; }
+  .footer-ref-bottom { background:#6c6c6c; color:#f4f4f4; text-align:center; font-size:12px; padding:7px 12px; }
+  .hours-ref { margin-top:18px; }
+  .hours-ref strong { display:block; color:#666; font-family:'Montserrat',sans-serif; font-size:14px; margin-bottom:4px; }
+  .hide-old-footer { display:none; }
+
+  @media (max-width: 900px) {
+    .about-card-ref, .promo-card-ref { grid-template-columns:1fr; }
+    .contact-list-ref { grid-template-columns:1fr 1fr; }
+    .promo-left-ref { min-height:250px; }
+    .promo-copy-ref h3 { font-size:30px; }
+    .footer-ref-main { grid-template-columns:1fr; text-align:center; }
+    .footer-ref ul { display:inline-block; text-align:center; }
+  }
+  @media (max-width: 600px) {
+    .print-block { padding:34px 16px; }
+    .about-card-ref .about-media { min-height:auto; }
+    .contact-list-ref { grid-template-columns:1fr; gap:16px; }
+    .watch-ref { width:180px; height:180px; left:50%; }
+    .promo-left-ref { min-height:210px; }
+    .promo-copy-ref { padding:28px 22px; }
+    .promo-copy-ref h3 { font-size:26px; }
+    .about-actions-ref { gap:12px; }
+    .btn-ref { width:100%; }
+  }
+
+</style>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="shortcut icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<meta name="theme-color" content="#000000">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="jebai-center.html" class="back-btn">
+      <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Voltar ao Jebai
+    </a>
+    <a href="jebai-center.html" class="logo-header">
+      <div class="logo-icon" style="background:transparent;padding:0;"><svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" width="34" height="38">
+  <!-- Outer gold J -->
+  <path d="M72,8 L72,75 Q72,105 45,105 Q18,105 18,78" fill="none" stroke="#F5C018" stroke-width="11" stroke-linecap="round"/>
+  <!-- Middle gray J -->
+  <path d="M57,22 L57,75 Q57,91 45,91 Q33,91 33,78" fill="none" stroke="#B0B0B0" stroke-width="10" stroke-linecap="round"/>
+  <!-- Inner teal J -->
+  <path d="M43,8 L43,75 Q43,78 45,78" fill="none" stroke="#2BBFB0" stroke-width="10" stroke-linecap="round"/>
+</svg></div>
+      <small>Jebai Center</small>
+    </a>
+    <div class="header-icons">
+      <details class="whatsapp-contact">
+        <summary title="WhatsApp" aria-label="Abrir contatos do WhatsApp">
+          <svg viewBox="0 0 24 24" class="icon-svg" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </summary>
+        <div class="whatsapp-menu" aria-label="Escolha um contato">
+          <a class="whatsapp-option" href="https://wa.me/554530255027" target="_blank" rel="noopener noreferrer">
+            <span class="whatsapp-badge">BR</span>
+            <span><strong>Brasil</strong><span>+55 (45) 3025 5027</span></span>
+          </a>
+          <a class="whatsapp-option" href="https://wa.me/59561511408" target="_blank" rel="noopener noreferrer">
+            <span class="whatsapp-badge">PY</span>
+            <span><strong>Paraguai</strong><span>+595 (61) 511 408</span></span>
+          </a>
+          <a class="whatsapp-option" href="https://wa.me/59561513495" target="_blank" rel="noopener noreferrer">
+            <span class="whatsapp-badge">PY</span>
+            <span><strong>Paraguai</strong><span>+595 (61) 513 495</span></span>
+          </a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<section class="store-hero">
+  <svg class="hero-circles" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="400" cy="200" r="300" fill="none" stroke="#fff" stroke-width="3"/>
+    <circle cx="400" cy="200" r="220" fill="none" stroke="#fff" stroke-width="3"/>
+    <circle cx="400" cy="200" r="140" fill="none" stroke="#fff" stroke-width="3"/>
+  </svg>
+  <div class="store-hero-inner">
+    <div class="breadcrumb">
+      <a href="jebai-center.html">Jebai Center</a>
+      <span>›</span>
+      <a href="jebai-center.html#lojas">Lojas</a>
+      <span>›</span>
+      <span style="color:var(--dark);">Tchê Loco Electrônicos</span>
+    </div>
+    <div class="store-hero-content">
+      <div class="custom-hero-banner">
+        <div class="banner-image-hotspot-wrap">
+                  <img src="assets/tche-loco-banner.png" alt="Banner personalizado da Tchê Loco Electrônicos" decoding="async" fetchpriority="high">
+                  <a class="banner-buy-hotspot" href="https://www.tcheloco.com.py/br/smart-watch-fitness/562560-relogio-smart-g-tide-r6-pro-gps-cinza.html" target="_blank" rel="noopener" aria-label="Comprar G-Tide R6 Pro na loja Tche Loco"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner"><div class="stat-item"><div class="stat-num">Preços</div><div class="stat-label">Loucos</div></div><div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Gadgets</div></div><div class="stat-item"><div class="stat-num">4.6★</div><div class="stat-label">Avaliação</div></div><div class="stat-item"><div class="stat-num">Diário</div><div class="stat-label">Novas ofertas</div></div></div>
+</div>
+
+<section class="section catalog-section" id="catalogo">
+  <div class="section-inner catalog-inner">
+    <aside class="category-sidebar" aria-label="Categorias de produtos">
+      <div class="category-title">CATEGORIAS</div>
+      <div class="category-list" id="category-filters"></div>
+    </aside>
+
+    <div class="catalog-content">
+      <div class="catalog-heading-row">
+        <h2 class="section-title" style="margin-bottom:0;">Catálogo de <span>Produtos</span></h2>
+        <div class="search-box catalog-search">
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="#999" stroke-width="2" fill="none" style="position:absolute; left:12px; top:50%; transform:translateY(-50%);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="Buscar por nome, código ou categoria...">
+        </div>
+      </div>
+
+      <div id="loading-state" style="text-align:center; padding:60px 0;">
+        <div class="spinner" style="display:inline-block; width:40px; height:40px; border:4px solid rgba(0,0,0,0.1); border-left-color:var(--brand); border-radius:50%; animation:spin 1s linear infinite;"></div>
+        <p style="margin-top:16px; color:var(--gray); font-weight:600; font-family:'Montserrat',sans-serif; font-size:15px;">Carregando o catálogo completo...</p>
+      </div>
+
+      <div class="products-grid" id="products-grid"></div>
+      <div style="text-align:center; margin-top:40px;">
+        <button id="load-more-btn" style="display:none; margin:0 auto; background:var(--brand); color:#fff; border:none; padding:14px 36px; border-radius:8px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 12px rgba(192, 57, 43, 0.3);">Carregar Mais Produtos</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+
+  /* SIDEBAR DE CATEGORIAS - ESTILO REFERÊNCIA */
+  .catalog-section { background:#ffffff; padding-top:44px; }
+  .catalog-inner { display:grid; grid-template-columns:292px minmax(0,1fr); gap:26px; align-items:start; }
+  .category-sidebar { background:#fff; border:1px solid #ededed; box-shadow:0 10px 30px rgba(0,0,0,0.06); position:sticky; top:88px; overflow:hidden; }
+  .category-title { background:#333; color:#fff; font-family:'Montserrat',sans-serif; font-size:26px; font-weight:900; letter-spacing:.4px; padding:22px 24px; border-top:4px solid var(--brand); }
+  .category-list { display:flex; flex-direction:column; }
+  .category-btn { width:100%; border:0; background:#fff; border-bottom:1px solid #f1f1f1; min-height:58px; padding:0 14px 0 18px; display:grid; grid-template-columns:38px 1fr auto; align-items:center; gap:12px; color:#344253; cursor:pointer; text-align:left; font-family:'Montserrat',sans-serif; transition:background .18s ease, color .18s ease, transform .18s ease; }
+  .category-btn:hover { background:#fafafa; color:var(--brand); transform:translateX(2px); }
+  .category-btn.active { background:#fff7f7; color:var(--brand); box-shadow:inset 4px 0 0 var(--brand); }
+  .category-icon { width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; font-size:24px; filter:grayscale(1); opacity:.8; }
+  .category-name { font-size:18px; font-weight:900; text-transform:uppercase; line-height:1.15; }
+  .category-count { min-width:28px; height:22px; padding:0 7px; border-radius:999px; background:#f4f4f4; color:#777; font-size:11px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; }
+  .category-btn.active .category-count { background:var(--brand); color:#fff; }
+  .catalog-content { min-width:0; }
+  .catalog-heading-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:18px; gap:16px; }
+  .catalog-search { position:relative; width:100%; max-width:400px; }
+  .catalog-search input { width:100%; padding:12px 12px 12px 40px; border:1px solid var(--border); border-radius:8px; font-family:'Montserrat',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; }
+  @media (max-width: 980px) {
+    .catalog-inner { grid-template-columns:1fr; }
+    .category-sidebar { position:relative; top:auto; }
+    .category-list { display:grid; grid-template-columns:repeat(2,1fr); }
+    .category-btn { border-right:1px solid #f1f1f1; }
+  }
+  @media (max-width: 600px) {
+    .category-title { font-size:22px; padding:18px 20px; }
+    .category-list { grid-template-columns:1fr; max-height:420px; overflow:auto; }
+    .category-name { font-size:16px; }
+    .catalog-heading-row { align-items:flex-start; }
+  }
+
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  .search-box input:focus { border-color: var(--brand) !important; box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1); }
+  .product-img img { transition: transform 0.3s ease; }
+  .product-card:hover .product-img img { transform: scale(1.08); }
+  #load-more-btn:hover { background: #a93226; transform: translateY(-2px); box-shadow:0 6px 16px rgba(192, 57, 43, 0.4); }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('products-grid');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const searchInput = document.getElementById('search-input');
+    const loadingState = document.getElementById('loading-state');
+    const filtersWrap = document.getElementById('category-filters');
+    const feedStatusText = document.getElementById('feed-status-text');
+    const feedSummaryPills = document.getElementById('feed-summary-pills');
+    const topTags = document.getElementById('feed-top-tags');
+    const statsNums = document.querySelectorAll('.stat-num');
+    const statsLabels = document.querySelectorAll('.stat-label');
+
+    let allProducts = [];
+    let filteredProducts = [];
+    let currentPage = 0;
+    let activeCategory = 'Todos';
+
+    const ITEMS_PER_PAGE = 12;
+    const XML_URL = 'https://www.tcheloco.com.py/lista/xml/feedstcheloco.xml';
+    const PRODUCT_CACHE_KEY = 'tche_loco_products_cache_v4';
+    const CACHE_TTL = 1000 * 60 * 60 * 12;
+    const FETCH_TIMEOUT = 9000;
+    const XML_SOURCES = [
+      XML_URL,
+      'https://api.allorigins.win/raw?url=' + encodeURIComponent(XML_URL),
+      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(XML_URL)
+    ];
+
+    const categoryPresets = [
+      { name:'Todos', icon:'☰', keywords:[] },
+      { name:'Celulares', icon:'📱', keywords:['celular','smartphone','iphone','android','xiaomi','samsung','motorola'] },
+      { name:'Fones', icon:'🎧', keywords:['fone','headphone','headset','earphone','auricular','buds','airpods'] },
+      { name:'Smartwatch', icon:'⌚', keywords:['smart watch','smartwatch','relogio smart','g-tide','watch'] },
+      { name:'Informática', icon:'💻', keywords:['notebook','computador','pc','mouse','teclado','monitor','ssd','memoria','pendrive','tablet','impressora'] },
+      { name:'Games', icon:'🎮', keywords:['game','gamer','controle','console','playstation','xbox','nintendo'] },
+      { name:'Áudio', icon:'🔊', keywords:['caixa de som','speaker','som','microfone','amplificador','radio'] },
+      { name:'Câmeras', icon:'📷', keywords:['camera','webcam','dvr','seguranca','cftv'] },
+      { name:'Carregadores', icon:'🔌', keywords:['carregador','cabo usb','fonte','power bank','bateria'] },
+      { name:'Casa', icon:'🏠', keywords:['lampada','led','ventilador','air fryer','cafeteira','aspirador','cozinha','utensilio'] },
+      { name:'Automotivo', icon:'🚗', keywords:['automotivo','carro','veicular','moto','gps','multimidia'] },
+      { name:'Variados', icon:'✨', keywords:[] }
+    ];
+
+    hydrateInfoCards();
+    loadCatalog();
+
+    async function loadCatalog() {
+      const cachedProducts = getCachedProducts();
+      if (cachedProducts.length) {
+        useProducts(cachedProducts, true);
+      }
+
+      try {
+        const xmlText = await fetchXMLWithFallback();
+        // Servidor pode devolver HTML 404 com status 200 (proxy mascara o erro).
+        // Rejeita qualquer coisa que não pareça XML.
+        const head = xmlText.trim().slice(0, 200).toLowerCase();
+        if (!head.startsWith('<?xml') && !head.includes('<rss') && !head.includes('<channel') && !head.match(/<item[\s>]/)) {
+          throw new Error('O servidor da Tchê Loco devolveu uma página HTML em vez do feed XML (provavelmente o endpoint mudou ou foi removido).');
+        }
+        const products = parseXMLToProducts(xmlText);
+        if (!products.length) {
+          throw new Error('O feed XML foi baixado mas não contém produtos (nenhuma tag <item> válida).');
+        }
+        saveCachedProducts(products);
+        useProducts(products, false);
+      } catch (err) {
+        console.error('Erro ao carregar XML:', err);
+        if (!cachedProducts.length) showFeedError(err.message);
+      }
+    }
+
+    async function fetchXMLWithFallback() {
+      let lastError;
+      for (const source of XML_SOURCES) {
+        try {
+          return await fetchWithTimeout(source, FETCH_TIMEOUT);
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error('Nenhuma fonte do XML respondeu.');
+    }
+
+    function fetchWithTimeout(url, timeout) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+      return fetch(url, { signal: controller.signal, cache: 'default' })
+        .then(response => {
+          if (!response.ok) throw new Error('Falha ao acessar o feed: ' + response.status);
+          return response.text();
+        })
+        .then(text => {
+          // Valida que é XML — proxies podem mascarar 404 retornando HTML com status 200
+          const head = text.trim().slice(0, 200).toLowerCase();
+          const looksLikeXml = head.startsWith('<?xml') || head.includes('<rss') || head.includes('<channel') || /<item[\s>]/.test(head);
+          if (!looksLikeXml) throw new Error('Resposta não é XML válido (provável página HTML de erro)');
+          return text;
+        })
+        .finally(() => clearTimeout(timer));
+    }
+
+    function getCachedProducts() {
+      try {
+        const raw = localStorage.getItem(PRODUCT_CACHE_KEY);
+        if (!raw) return [];
+        const cached = JSON.parse(raw);
+        if (!cached.products || Date.now() - cached.time > CACHE_TTL) return [];
+        return cached.products;
+      } catch (_) {
+        return [];
+      }
+    }
+
+    function saveCachedProducts(products) {
+      try {
+        const slim = products.map(({ title, link, preco, imagem, codigo, categoria, marca, descricao, displayCategory, searchText }) => ({
+          title, link, preco, imagem, codigo, categoria, marca, descricao, displayCategory, searchText
+        }));
+        localStorage.setItem(PRODUCT_CACHE_KEY, JSON.stringify({ time: Date.now(), products: slim }));
+      } catch (_) {
+        // Se o navegador negar espaço no localStorage, o site continua funcionando sem cache local.
+      }
+    }
+
+    function parseXMLToProducts(xmlText) {
+      const data = new DOMParser().parseFromString(xmlText, 'text/xml');
+      const items = Array.from(data.querySelectorAll('item'));
+      return items
+        .map(parseItem)
+        .filter(prod => prod.title || prod.codigo || prod.link)
+        .map(prod => {
+          const displayCategory = categorizeProduct(prod);
+          return { ...prod, displayCategory, searchText: normalizeText(productText({ ...prod, displayCategory })) };
+        });
+    }
+
+    function useProducts(products, fromCache) {
+      allProducts = products;
+      filteredProducts = allProducts.filter(hasUsableImage);
+      currentPage = 0;
+      updateStats();
+      buildFilters();
+      updateFeedSummary(fromCache);
+      if (loadingState) loadingState.style.display = 'none';
+      renderProducts(false);
+    }
+
+    function showFeedError(detail) {
+      const msg = detail || 'Não foi possível carregar o feed XML agora.';
+      if (loadingState) {
+        loadingState.innerHTML =
+          '<div class="error-box" style="background:#fff5f5;border:1px solid #f5c6cb;color:#721c24;padding:24px;border-radius:8px;text-align:left;max-width:680px;margin:0 auto;font-family:\'Open Sans\',sans-serif">' +
+          '<h3 style="font-family:\'Montserrat\',sans-serif;font-size:18px;margin-bottom:10px">Catálogo indisponível</h3>' +
+          '<p style="margin-bottom:8px">' + msg.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + '</p>' +
+          '<p style="font-size:13px;color:#555">URL configurado: <code>https://www.tcheloco.com.py/lista/xml/feedstcheloco.xml</code></p>' +
+          '<p style="font-size:13px;color:#555;margin-top:8px">Para reativar, peça ao admin da Tchê Loco a URL atualizada do feed e troque a constante <code>XML_URL</code> em <code>loja-tche-loco.html</code>.</p>' +
+          '</div>';
+      }
+      if (feedStatusText) feedStatusText.textContent = 'Feed XML indisponível — endpoint pode ter mudado.';
+      if (feedSummaryPills) feedSummaryPills.innerHTML = '<span>Feed indisponível</span><span>Endpoint 404</span><span>Atualizar URL</span>';
+    }
+
+    function parseItem(item) {
+      const title = getNodeText(item, ['title','nome','name','produto']);
+      const link = getNodeText(item, ['link','url','produto_link']);
+      const preco = getNodeText(item, ['preco','price','valor','preco_promo']);
+      const imagem = getNodeText(item, ['link_imagem','imagem','image','thumbnail']);
+      const codigo = getNodeText(item, ['codigo','sku','id']);
+      const categoria = getNodeText(item, ['categoria','category','departamento','grupo']) || 'Geral';
+      const marca = getNodeText(item, ['marca','brand','fabricante']);
+      const descricao = getNodeText(item, ['descricao','description','resumo','subtitle']);
+      return { title, link, preco, imagem, codigo, categoria, marca, descricao };
+    }
+
+    function getNodeText(item, selectors) {
+      for (const selector of selectors) {
+        const node = item.querySelector(selector);
+        if (node?.textContent?.trim()) return node.textContent.trim();
+      }
+      return '';
+    }
+
+    function normalizeText(str) {
+      return (str || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    function productText(prod) {
+      return normalizeText([prod.title, prod.codigo, prod.categoria, prod.displayCategory, prod.marca, prod.descricao].filter(Boolean).join(' '));
+    }
+
+    function categorizeProduct(prod) {
+      const text = productText(prod);
+      for (const category of categoryPresets) {
+        if (category.name === 'Todos' || category.name === 'Variados') continue;
+        if (category.keywords.some(keyword => text.includes(normalizeText(keyword)))) return category.name;
+      }
+      return prod.categoria && prod.categoria !== 'Geral' ? prod.categoria : 'Variados';
+    }
+
+    function hasUsableImage(product) {
+      const img = String(product?.imagem || '').trim();
+      if (!img) return false;
+      const invalidTokens = ['sem imagem', 'no image', 'placeholder', 'undefined', 'null'];
+      const normalized = img.toLowerCase();
+      if (invalidTokens.some(token => normalized.includes(token))) return false;
+      return /^(https?:)?\/\//i.test(img) || img.startsWith('data:image/') || img.startsWith('assets/');
+    }
+
+    function buildFilters() {
+      if (!filtersWrap) return;
+      filtersWrap.innerHTML = '';
+      const counts = new Map(categoryPresets.map(cat => [cat.name, 0]));
+      for (const product of allProducts) {
+        if (!hasUsableImage(product)) continue;
+        counts.set('Todos', (counts.get('Todos') || 0) + 1);
+        const category = categoryPresets.some(cat => cat.name === product.displayCategory) ? product.displayCategory : 'Variados';
+        counts.set(category, (counts.get(category) || 0) + 1);
+      }
+
+      categoryPresets.forEach(category => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'category-btn' + (category.name === activeCategory ? ' active' : '');
+        btn.dataset.category = category.name;
+        btn.innerHTML = `
+          <span class="category-icon" aria-hidden="true">${escapeHTML(category.icon)}</span>
+          <span class="category-name">${escapeHTML(category.name)}</span>
+          <span class="category-count">${escapeHTML(counts.get(category.name) || 0)}</span>
+        `;
+        btn.addEventListener('click', () => {
+          activeCategory = category.name;
+          currentPage = 0;
+          Array.from(filtersWrap.children).forEach(chip => chip.classList.remove('active'));
+          btn.classList.add('active');
+          applyFilters();
+        });
+        filtersWrap.appendChild(btn);
+      });
+    }
+
+    function categoryMatches(categoryName, product) {
+      if (categoryName === 'Todos') return true;
+      if (categoryName === 'Variados') {
+        return !categoryPresets.some(cat => cat.name !== 'Todos' && cat.name !== 'Variados' && cat.name === product.displayCategory);
+      }
+      return product.displayCategory === categoryName || product.categoria === categoryName;
+    }
+
+    function applyFilters() {
+      const term = normalizeText(searchInput?.value.trim() || '');
+      filteredProducts = allProducts.filter(product => {
+        const categoryOk = categoryMatches(activeCategory, product);
+        const termOk = !term || (product.searchText || productText(product)).includes(term);
+        return hasUsableImage(product) && categoryOk && termOk;
+      });
+      currentPage = 0;
+      renderProducts(false);
+      updateFeedSummary(true);
+    }
+
+    function renderProducts(append = false) {
+      if (!grid || !loadMoreBtn) return;
+      if (!append) grid.innerHTML = '';
+
+      const start = currentPage * ITEMS_PER_PAGE;
+      const end = start + ITEMS_PER_PAGE;
+      const productsToShow = filteredProducts.slice(start, end);
+
+      if (!productsToShow.length && !append) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--gray);font-size:16px;">Nenhum produto encontrado com esse filtro.</div>';
+        loadMoreBtn.style.display = 'none';
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      productsToShow.forEach(product => fragment.appendChild(createProductCard(product)));
+      grid.appendChild(fragment);
+      const canLoadMore = end < filteredProducts.length && activeCategory === 'Todos';
+      loadMoreBtn.style.display = canLoadMore ? 'block' : 'none';
+    }
+
+    function createProductCard(product) {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+
+      const clean = cleanTitle(product.title || 'Produto Tchê Loco');
+      const shortTitle = makeShort(clean, 62);
+      const desc = product.descricao ? makeShort(product.descricao, 88) : 'Veja detalhes completos do produto direto na página oficial da Tchê Loco.';
+      const imageUrl = safeImageURL(product.imagem);
+      const productUrl = safeExternalURL(product.link || '#');
+      const pills = [product.displayCategory || product.categoria, product.marca].filter(Boolean).slice(0, 2)
+        .map(item => `<span class="meta-pill">${escapeHTML(item)}</span>`).join('');
+
+      card.innerHTML = `
+        <div class="product-img" style="background:#fff;padding:15px;height:180px;">
+          <img src="${escapeHTML(imageUrl)}" alt="${escapeHTML(clean)}" style="max-width:100%;max-height:100%;object-fit:contain;" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest('.product-card')?.remove();">
+        </div>
+        <div class="product-info" style="display:flex;flex-direction:column;height:calc(100% - 180px);justify-content:space-between;">
+          <div>
+            <div class="product-meta">${pills}</div>
+            <div class="product-name" title="${escapeHTML(clean)}" style="font-size:14px;margin-bottom:6px;">${escapeHTML(shortTitle)}</div>
+            <div class="product-desc" style="margin-bottom:10px;font-size:12px;">${escapeHTML(desc)}</div>
+            <div class="product-desc" style="margin-bottom:12px;font-size:12px;">Cód: <strong>${escapeHTML(product.codigo || '—')}</strong></div>
+          </div>
+          <div>
+            <div class="product-price" style="font-size:18px;color:var(--brand);margin-bottom:12px;">${escapeHTML(formatPrice(product.preco))}</div>
+            <a href="${escapeHTML(productUrl)}" ${productUrl !== '#' ? 'target="_blank" rel="noopener noreferrer"' : ''} class="btn-buy" style="display:block;text-align:center;padding:10px;font-size:13px;text-transform:uppercase;letter-spacing:.5px;">Ver na Loja</a>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    function updateStats() {
+      const visibleProducts = allProducts.filter(hasUsableImage);
+      const categories = new Set(visibleProducts.map(p => p.displayCategory || p.categoria).filter(Boolean));
+      if (statsNums[0]) statsNums[0].textContent = allProducts.length || '0';
+      if (statsLabels[0]) statsLabels[0].textContent = 'Produtos';
+      if (statsNums[1]) statsNums[1].textContent = categories.size || '0';
+      if (statsLabels[1]) statsLabels[1].textContent = 'Categorias';
+      if (statsNums[2]) statsNums[2].textContent = visibleProducts.length || '0';
+      if (statsLabels[2]) statsLabels[2].textContent = 'Com foto';
+      if (statsNums[3]) statsNums[3].textContent = 'Online';
+      if (statsLabels[3]) statsLabels[3].textContent = 'Catálogo ativo';
+    }
+
+    function updateFeedSummary(fromCache = false) {
+      const visibleCount = allProducts.filter(hasUsableImage).length;
+      const categories = [...new Set(allProducts.map(p => p.displayCategory || p.categoria).filter(Boolean))];
+      const brands = [...new Set(allProducts.map(p => p.marca).filter(Boolean))].slice(0, 6);
+
+      if (feedStatusText) {
+        feedStatusText.textContent = `Feed com ${allProducts.length} produtos. Na vitrine, ${visibleCount} itens com imagem estão disponíveis. ${fromCache ? 'Carregamento usando cache local para abrir mais rápido.' : 'Dados atualizados a partir do XML.'}`;
+      }
+      if (feedSummaryPills) {
+        feedSummaryPills.innerHTML = `
+          <span>${escapeHTML(filteredProducts.length)} visíveis</span>
+          <span>${escapeHTML(categories.length)} categorias</span>
+          <span>${escapeHTML(allProducts.filter(p => p.link).length)} links ativos</span>
+          <span>${escapeHTML(visibleCount)} com imagem</span>
+        `;
+      }
+      if (topTags) {
+        const top = [...categories.slice(0, 4), ...brands.slice(0, 4)].slice(0, 8);
+        topTags.innerHTML = top.map(item => `<span>${escapeHTML(item)}</span>`).join('');
+      }
+    }
+
+    function hydrateInfoCards() {
+      const heroBanner = document.querySelector('.custom-hero-banner img');
+      const promoBanner = document.querySelector('.promo-banner-custom');
+      const aboutBanner = document.getElementById('about-banner-image');
+      if (heroBanner?.getAttribute('src')) {
+        if (promoBanner && !promoBanner.getAttribute('src')) promoBanner.src = heroBanner.getAttribute('src');
+        if (aboutBanner) aboutBanner.src = heroBanner.getAttribute('src');
+      }
+    }
+
+    function formatPrice(priceStr) { return priceStr || 'Preço sob consulta'; }
+    function cleanTitle(title) { return (title || '').replace(/^\*+/, '').replace(/\s+/g, ' ').trim(); }
+    function makeShort(text, limit) { return text && text.length > limit ? text.slice(0, limit - 3).trim() + '...' : (text || ''); }
+    function escapeHTML(value) { return String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char])); }
+    function safeExternalURL(value) {
+      try {
+        const url = new URL(String(value || '').trim(), window.location.href);
+        return ['https:', 'http:'].includes(url.protocol) ? url.href : '#';
+      } catch (_) { return '#'; }
+    }
+    function safeImageURL(value) {
+      const raw = String(value || '').trim();
+      if (raw.startsWith('data:image/') || raw.startsWith('assets/')) return raw;
+      try {
+        const url = new URL(raw, window.location.href);
+        return ['https:', 'http:'].includes(url.protocol) ? url.href : '';
+      } catch (_) { return ''; }
+    }
+
+    loadMoreBtn?.addEventListener('click', () => {
+      currentPage++;
+      renderProducts(true);
+    });
+
+    let debounceTimer;
+    searchInput?.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(applyFilters, 250);
+    });
+  });
+</script>
+
+
+
+<section class="print-area">
+  <div class="print-wrap">
+    <div class="print-block">
+      <div class="about-card-ref">
+        <div class="about-media">
+          <img id="about-banner-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Banner da Tchê Loco Eletrônicos">
+        </div>
+        <div class="about-copy-ref">
+          <h2>Sobre a Loja</h2>
+          <div class="yellow-line"></div>
+          <p>A Tchê Loco está no mercado de eletrônicos há anos, sendo uma das lojas que mais chamam atenção no Jebai Center pela variedade de produtos, ofertas e visual forte da marca.</p>
+          <p>Nossa proposta é unir atendimento direto, preços competitivos e uma seleção de eletrônicos, acessórios e gadgets que agradam tanto quem compra para uso próprio quanto quem revende.</p>
+          <p>A equipe da Tchê Loco busca atender clientes do Brasil, Paraguai e Argentina com praticidade, confiança e uma experiência rápida dentro do centro comercial.</p>
+          <div class="about-actions-ref">
+            <a href="https://wa.me/595981552280" target="_blank" class="btn-ref primary" rel="noopener noreferrer">Fale Conosco</a>
+            <a href="https://www.tcheloco.com.py/" target="_blank" class="btn-ref secondary" rel="noopener noreferrer">Visite Nosso Site</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="print-block contact-center-ref">
+      <h2 class="contact-title-ref">Contato</h2>
+      <div class="yellow-line" style="margin-left:auto;margin-right:auto;"></div>
+      <div class="contact-list-ref">
+        <div class="contact-item-ref">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2cb8af" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>+55 (45) 3025 5027</span>
+        </div>
+        <div class="contact-item-ref">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2cb8af" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.63 2.62a2 2 0 0 1-.45 2.11L8 9.91a16 16 0 0 0 6.09 6.09l1.46-1.29a2 2 0 0 1 2.11-.45c.84.3 1.72.51 2.62.63A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+595 (61) 511 408</span>
+        </div>
+        <div class="contact-item-ref">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2cb8af" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Galeria Jebai Center, 2º Piso<br>Ciudad del Este (CDE) – Paraguay</span>
+        </div>
+        <div class="contact-item-ref">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#2cb8af" stroke-width="2"><path d="M21 7.5V6a2 2 0 0 0-2-2h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v1.5"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+          <span>Segunda a Sexta: 5:45 às 15:15<br>Sábados: 5:45 à 14:45</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="print-block">
+      <div class="promo-card-ref promo-card-image">
+        <div class="banner-image-hotspot-wrap">
+                  <img class="promo-banner-custom" src="assets/tche-loco-banner.png" alt="Banner promocional G-Tide R6 Pro" loading="lazy" decoding="async">
+                  <a class="banner-buy-hotspot" href="https://www.tcheloco.com.py/br/smart-watch-fitness/562560-relogio-smart-g-tide-r6-pro-gps-cinza.html" target="_blank" rel="noopener" aria-label="Comprar G-Tide R6 Pro na loja Tche Loco"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-ref">
+  <div class="footer-ref-main">
+    <div>
+      <h4>Jebai Center</h4>
+      <ul>
+        <li><a href="#">Sobre Nós</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+        <li><a href="#">Quero Anunciar</a></li>
+        <li><a href="#">Lojas de Confiança</a></li>
+      </ul>
+      <div class="hours-ref">
+        <h4 style="margin-bottom:6px;">Horário de Atendimento</h4>
+        <strong>Segunda - Sábado</strong>
+        <p>7:00 até 18:00</p>
+      </div>
+    </div>
+
+    <div class="footer-ref-center">
+      <div class="footer-logo-icon" style="background:transparent;margin:0 auto 8px; width:auto; height:auto;">
+        <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" width="56" height="64">
+          <path d="M72,8 L72,75 Q72,105 45,105 Q18,105 18,78" fill="none" stroke="#F5C018" stroke-width="11" stroke-linecap="round"/>
+          <path d="M57,22 L57,75 Q57,91 45,91 Q33,91 33,78" fill="none" stroke="#222222" stroke-width="10" stroke-linecap="round"/>
+          <path d="M43,8 L43,75 Q43,78 45,78" fill="none" stroke="#2BBFB0" stroke-width="10" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div style="font-family:'Montserrat',sans-serif; font-size:13px; color:#444; font-weight:700;">JEBAI CENTER</div>
+      <div class="socials">
+        <a href="https://wa.me/595981552280" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M13.5 21v-7h2.3l.4-3h-2.7V9.2c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.8 1.3-3.8 3.9V11H7.8v3H10v7h3.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div style="text-align:right;">
+      <h4>Atendimento ao Cliente</h4>
+      <ul>
+        <li><a href="#">Telefones Úteis</a></li>
+        <li><a href="#">Reclame Aqui</a></li>
+        <li><a href="#">Quero Anunciar</a></li>
+        <li><a href="#">Localização</a></li>
+        <li><a href="https://wa.me/595981552280" target="_blank" rel="noopener noreferrer">Fale Conosco</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-ref-bottom">Todos os direitos reservados, © Jebai Center – desenvolvido por <a href="https://evah.io" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; cursor: pointer;">EVAH.io</a>
+</footer>
+
+<style>
+/* CORRECAO DE ROLAGEM DO CATALOGO */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;}
+.catalog-section,.catalog-inner,.catalog-content,.products-grid,.category-sidebar,.category-list{max-height:none!important;height:auto!important;overflow:visible!important;}
+@media (max-width:980px){.category-sidebar{position:relative!important;top:auto!important}.category-list{max-height:none!important;overflow:visible!important}}
+@media (min-width:981px){.category-sidebar{align-self:start;}}
+</style>
+</body>
+</html>
+<script src="dashboard-tracker.js"></script>

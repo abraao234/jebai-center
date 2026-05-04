@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://gsqcqpcliqbzmzkwpnxf.supabase.co wss://gsqcqpcliqbzmzkwpnxf.supabase.co https://cdn.jsdelivr.net; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Dashboard Completo — Jebai Center</title>
+<link rel="preconnect" href="https://gsqcqpcliqbzmzkwpnxf.supabase.co" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e6eaf0;--teal:#20b2ad;--teal-dark:#159892;
+  --yellow:#F5C800;--red:#cc0000;--green:#22a06b;--blue:#2f80ed;--purple:#7b61ff;--orange:#f79009;
+  --shadow:0 18px 50px rgba(16,24,40,.08);--shadow2:0 8px 24px rgba(16,24,40,.08);--radius:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}a{text-decoration:none;color:inherit}button,input,select{font:inherit}.hide{display:none!important}
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at top left,rgba(32,178,173,.20),transparent 32%),radial-gradient(circle at bottom right,rgba(245,200,0,.22),transparent 30%),#f7f9fc}.login-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:34px}.logo,.brand-mark{display:grid;place-items:center;background:linear-gradient(135deg,var(--teal),#4ad3cd);color:#fff;font-family:'Montserrat';font-weight:900}.logo{width:58px;height:58px;border-radius:18px;font-size:26px;margin-bottom:18px}.login-card h1{font-family:'Montserrat';font-size:29px;margin-bottom:8px}.login-card p{color:var(--muted);line-height:1.5;margin-bottom:22px}.input,.search,.select{border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14px;outline:none;background:#fff;color:var(--text)}.input{width:100%;margin:8px 0 14px}.input:focus,.search:focus,.select:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(32,178,173,.12)}.btn{border-radius:14px;padding:12px 16px;font-family:'Montserrat';font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#fff;color:var(--text);transition:.2s}.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}.btn-primary{background:var(--teal);color:#fff;border-color:var(--teal)}.btn-danger{color:var(--red)}.btn-soft{background:#eefcfb;color:var(--teal-dark);border-color:#c7f1ee}.hint{font-size:12px;color:var(--muted);margin-top:14px}.error{display:none;color:var(--red);font-weight:800;font-size:13px;margin:-4px 0 12px}.app{display:none}.topbar{min-height:76px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 26px;position:sticky;top:0;z-index:10}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:44px;height:44px;border-radius:15px}.brand h2{font-family:'Montserrat';font-size:18px}.brand span{display:block;font-size:12px;color:var(--muted);font-weight:700}.top-actions{display:flex;gap:10px;flex-wrap:wrap}.layout{max-width:1380px;margin:0 auto;padding:28px 20px 60px}.notice{background:#fff8db;border:1px solid #ffe58a;border-radius:18px;padding:14px 16px;margin-bottom:18px;color:#6a5300;line-height:1.45}.hero{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;margin-bottom:20px}.hero h1{font-family:'Montserrat';font-size:34px;letter-spacing:-.5px}.hero p{color:var(--muted);margin-top:6px}.quick-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}.stat,.panel,.mini-card{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow2)}.stat{border-radius:22px;padding:19px;position:relative;overflow:hidden}.stat:after{content:'';position:absolute;right:-28px;top:-30px;width:96px;height:96px;border-radius:50%;background:rgba(32,178,173,.08)}.stat-label{color:var(--muted);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px}.stat-num{font-family:'Montserrat';font-size:31px;font-weight:900;margin-top:8px}.stat small{display:block;color:var(--muted);margin-top:4px}.trend{font-size:12px;font-weight:900;margin-top:10px}.trend.good{color:var(--green)}.trend.warn{color:var(--orange)}.trend.bad{color:var(--red)}.dash-grid{display:grid;grid-template-columns:1.45fr .9fr;gap:18px}.panel{border-radius:var(--radius);padding:20px;margin-top:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}.panel h3{font-family:'Montserrat';font-size:18px}.panel p.muted{color:var(--muted);font-size:13px;margin-top:4px}.tools{display:flex;gap:10px;flex-wrap:wrap}.search{min-width:260px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;cursor:pointer;font-family:'Montserrat';font-weight:800;color:var(--muted)}.tab.active{background:var(--teal);border-color:var(--teal);color:#fff}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px}table{width:100%;border-collapse:collapse;min-width:850px}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top}th{font-family:'Montserrat';font-size:11px;text-transform:uppercase;color:var(--muted);background:#fafbfc;letter-spacing:.4px}tbody tr:hover{background:#fbfcff}.pill{display:inline-flex;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800}.pill-green{background:#eafaf2;color:#137547}.pill-blue{background:#eaf7ff;color:#11618c}.pill-orange{background:#fff4e5;color:#b54708}.pill-red{background:#fff1f1;color:#b42318}.empty{text-align:center;padding:46px 16px;color:var(--muted)}.chart-card{min-height:320px}.bars{display:flex;align-items:end;gap:12px;height:220px;padding:16px 4px 4px;border-bottom:1px solid var(--line)}.bar-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}.bar{width:100%;max-width:46px;border-radius:12px 12px 0 0;background:linear-gradient(180deg,var(--teal),#80e4df);min-height:8px;position:relative}.bar span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:var(--muted)}.bar-label{font-size:11px;color:var(--muted);font-weight:800}.donut-wrap{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center}.donut{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--teal) 0deg 180deg,var(--yellow) 180deg 270deg,var(--purple) 270deg 330deg,var(--line) 330deg 360deg);position:relative}.donut:after{content:'';position:absolute;inset:26px;background:#fff;border-radius:50%}.legend{display:grid;gap:10px}.legend-row{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--muted);font-size:13px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;background:var(--teal)}.dot.yellow{background:var(--yellow)}.dot.purple{background:var(--purple)}.dot.gray{background:var(--line)}.activity{display:grid;gap:12px}.activity-item{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start}.activity-icon{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:#eefcfb;color:var(--teal);font-weight:900}.activity-title{font-weight:800}.activity-meta{font-size:12px;color:var(--muted);margin-top:2px}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.mini-card{border-radius:18px;padding:16px}.mini-card strong{font-family:'Montserrat';font-size:20px}.mini-card span{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-top:4px}.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.setting-box{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fafbfc}.setting-box h4{font-family:'Montserrat';font-size:15px;margin-bottom:8px}.setting-box p{color:var(--muted);font-size:13px;line-height:1.45}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;background:#111827;color:#fff;border-radius:999px;padding:12px 18px;font-weight:800;z-index:99;transition:.25s}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* ── SOLICITAÇÕES DE LOJA ── */
+.req-list{display:grid;gap:14px}
+.req-card{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fafbfc;transition:.18s}
+.req-card:hover{border-color:#cfd5e0;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+.req-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.req-head h4{font-family:'Montserrat';font-size:16px;color:var(--text)}
+.req-head h4 small{display:block;color:var(--muted);font-size:12px;font-weight:700;margin-top:2px}
+.req-status-pill{font-size:11px;font-weight:900;padding:5px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.req-pending{background:#fff4e5;color:#b54708}
+.req-approved{background:#eafaf2;color:#137547}
+.req-rejected{background:#fff1f1;color:#b42318}
+.req-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px 14px;font-size:13px;color:var(--muted);margin-bottom:10px}
+.req-meta strong{color:var(--text);display:block;font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.req-desc{font-size:13px;line-height:1.5;color:var(--text);background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;white-space:pre-wrap}
+.req-actions{display:flex;gap:8px;flex-wrap:wrap}
+.req-actions .btn{padding:8px 14px;font-size:13px}
+.req-empty{text-align:center;padding:40px 16px;color:var(--muted)}
+.req-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.req-filter button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-family:'Montserrat';font-weight:800;font-size:12px;color:var(--muted)}
+.req-filter button.active{background:var(--teal);border-color:var(--teal);color:#fff}
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-overlay.active{display:flex}
+.modal-box{background:#fff;border-radius:22px;padding:26px;width:min(440px,100%);box-shadow:0 24px 60px rgba(15,23,42,.3)}
+.modal-box h3{font-family:'Montserrat';font-size:20px;margin-bottom:6px}
+.modal-box p{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:14px}
+.modal-box label{font-size:12px;font-weight:800;text-transform:uppercase;color:var(--muted);letter-spacing:.4px;display:block;margin-bottom:6px}
+.modal-box input,.modal-box textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;outline:none;margin-bottom:12px}
+.modal-box input:focus,.modal-box textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(32,178,173,.12)}
+.modal-box textarea{min-height:90px;resize:vertical;font-family:inherit}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.sb-section{margin-top:18px}.sb-header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}.sb-header h3{font-family:'Montserrat';font-size:18px}.sb-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.sb-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;padding:6px 12px;border-radius:999px;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}.sb-status.error{background:#fff1f2;color:#9f1239;border-color:#fecdd3}.sb-status.loading{background:#fefce8;color:#854d0e;border-color:#fde68a}.sb-dot{width:8px;height:8px;border-radius:50%;background:currentColor}.sb-count{font-size:12px;color:var(--muted);font-weight:800}.sb-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;margin-top:10px}.sb-table{width:100%;border-collapse:collapse;min-width:600px}.sb-table th{font-family:'Montserrat';font-size:11px;text-transform:uppercase;color:var(--muted);background:#fafbfc;letter-spacing:.4px;padding:13px 14px;text-align:left;border-bottom:1px solid var(--line)}.sb-table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sb-table tbody tr:hover{background:#fbfcff}.sb-table tbody tr:last-child td{border-bottom:none}.sb-empty{text-align:center;padding:46px 16px;color:var(--muted);font-size:14px}.sb-pagination{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}.sb-pagination span{font-size:13px;color:var(--muted);font-weight:700}.sb-pagination-btns{display:flex;gap:6px}
+@media(max-width:1060px){.grid{grid-template-columns:repeat(2,1fr)}.dash-grid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.quick-actions{justify-content:flex-start}.donut-wrap{grid-template-columns:1fr}.donut{margin:auto}.mini-grid,.settings-grid{grid-template-columns:1fr}}@media(max-width:620px){.grid{grid-template-columns:1fr}.topbar{padding:12px}.top-actions .btn{padding:10px 12px}.hero h1{font-size:27px}.panel-head{display:block}.tools{margin-top:12px}.search,.select{width:100%;min-width:0}.login-card{padding:26px}.layout{padding:20px 12px 50px}}
+</style>
+</head>
+<body>
+<section class="login-screen" id="loginScreen"><div class="login-card"><div class="logo">J</div><h1>Área do dono</h1><p>Entre com seu e-mail de administrador para ver o painel completo com cadastros, lojas, atividades e estatísticas do site.</p><label for="adminEmail"><strong>E-mail</strong></label><input class="input" id="adminEmail" type="email" placeholder="seu@email.com" autocomplete="email"><label for="adminPass"><strong>Senha</strong></label><input class="input" id="adminPass" type="password" placeholder="Digite sua senha" autocomplete="current-password"><div class="error" id="loginError">E-mail ou senha incorretos.</div><button class="btn btn-primary" onclick="loginAdmin()">Entrar no Dashboard</button><div class="hint">Apenas usuários com cargo <strong>admin</strong> têm acesso. Para criar a primeira conta, cadastre-se em <a href="login.html">login.html</a> e atualize o cargo via SQL no Supabase.</div></div></section>
+<section class="app" id="app"><header class="topbar"><a class="brand" href="index.html"><div class="brand-mark">J</div><div><h2>Jebai Center</h2><span>Dashboard administrativo completo</span></div></a><div class="top-actions"><button class="btn" onclick="exportCSV(activeTab)">Exportar aba atual</button><button class="btn btn-soft" onclick="refreshDashboard()">Atualizar</button><button class="btn" onclick="testarSupabase()">Testar Supabase</button><button class="btn btn-danger" onclick="logoutAdmin()">Sair</button></div></header>
+<main class="layout"><div class="notice"><strong>Importante:</strong> este painel já está com o Supabase conectado. Ele também mantém uma cópia no navegador para funcionar mesmo se a conexão falhar.</div>
+<section class="hero"><div><h1>Visão geral do seu site</h1><p id="updatedAt">Atualizado agora</p></div><div class="quick-actions"><button class="btn" onclick="seedExampleData()">Adicionar dados de teste</button><button class="btn btn-danger" onclick="clearExampleData()">Apagar dados de teste</button><button class="btn" onclick="window.open('index.html','_blank')">Abrir site</button><button class="btn" onclick="window.open('login.html','_blank')">Abrir login</button></div></section>
+<section class="grid"><article class="stat"><div class="stat-label">Cadastros</div><div class="stat-num" id="statUsers">0</div><small>Visitantes que criaram conta</small><div class="trend good" id="trendUsers">+0 hoje</div></article><article class="stat"><div class="stat-label">Cliques nas lojas</div><div class="stat-num" id="statOrders">0</div><small>Visitantes que abriram alguma loja</small><div class="trend good" id="trendOrders">+0 hoje</div></article><article class="stat"><div class="stat-label">Visitantes únicos</div><div class="stat-num" id="statCustomers">0</div><small>E-mails identificados</small><div class="trend warn" id="trendCustomers">0 ativos</div></article></section>
+<section class="mini-grid"><div class="mini-card"><strong id="miniLogged">0</strong><span>usuários com login salvo</span></div><div class="mini-card"><strong id="miniTopProduct">—</strong><span>loja mais clicada</span></div><div class="mini-card"><strong id="miniConversion">0</strong><span>cliques por cadastro</span></div></section>
+<div class="dash-grid"><section class="panel chart-card"><div class="panel-head"><div><h3>Movimento dos últimos 7 dias</h3><p class="muted">Cadastros e cliques nas lojas por dia</p></div></div><div class="bars" id="bars"></div></section><section class="panel"><div class="panel-head"><div><h3>Resumo por origem</h3><p class="muted">Onde os dados estão aparecendo</p></div></div><div class="donut-wrap"><div class="donut" id="donut"></div><div class="legend" id="legend"></div></div></section></div>
+<div class="dash-grid"><section class="panel"><div class="panel-head"><div><h3>Dados importantes</h3><p class="muted">Pesquise, filtre e exporte cadastros e cliques nas lojas</p></div><div class="tools"><input class="search" id="searchInput" placeholder="Pesquisar nome, e-mail, loja..." oninput="render()"><select class="select" id="dateFilter" onchange="render()"><option value="all">Todos</option><option value="today">Hoje</option><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option></select><button class="btn btn-danger" onclick="clearAllData()">Limpar dados</button></div></div><div class="tabs"><button class="tab active" id="tabUsers" onclick="setTab('users')">Cadastros</button><button class="tab" id="tabOrders" onclick="setTab('orders')">Cliques nas lojas</button><button class="tab" id="tabLogs" onclick="setTab('logs')">Atividades</button></div><div class="table-wrap"><table><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div></section><section class="panel"><div class="panel-head"><div><h3>Últimas atividades</h3><p class="muted">Eventos recentes encontrados no navegador</p></div></div><div class="activity" id="activityList"></div></section></div>
+<section class="panel" id="staticVisibilityPanel" style="margin-top:18px">
+  <div class="panel-head">
+    <div>
+      <h3>Visibilidade das lojas na home</h3>
+      <p class="muted">Você pode <strong>ocultar</strong> (reversível) ou <strong>deletar</strong> (com confirmação extra) cada loja fixa da página inicial. Ambas podem ser desfeitas pelo botão "Restaurar".</p>
+    </div>
+    <button class="btn btn-soft" onclick="loadStaticVisibility()">↺ Recarregar</button>
+  </div>
+  <div class="req-list" id="staticStoresList" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));display:grid;gap:12px"><div class="req-empty">Carregando…</div></div>
+</section>
+
+<section class="panel" id="storesPanel" style="margin-top:18px">
+  <div class="panel-head">
+    <div>
+      <h3>Lojas cadastradas</h3>
+      <p class="muted">Gerencie publicação, edite ou oculte lojas dos vendedores</p>
+    </div>
+    <button class="btn btn-soft" onclick="loadStores()">↺ Recarregar</button>
+  </div>
+  <div class="req-filter">
+    <button data-store-filter="pending_review" class="active" onclick="setStoreFilter('pending_review')">Aguardando aprovação <span id="storeCountPending">(0)</span></button>
+    <button data-store-filter="published" onclick="setStoreFilter('published')">Publicadas <span id="storeCountPublished">(0)</span></button>
+    <button data-store-filter="draft" onclick="setStoreFilter('draft')">Rascunhos <span id="storeCountDraft">(0)</span></button>
+    <button data-store-filter="hidden" onclick="setStoreFilter('hidden')">Ocultas <span id="storeCountHidden">(0)</span></button>
+    <button data-store-filter="all" onclick="setStoreFilter('all')">Todas <span id="storeCountAll">(0)</span></button>
+  </div>
+  <div class="req-list" id="storeList"><div class="req-empty">Carregando…</div></div>
+</section>
+
+<section class="panel" id="adminsPanel" style="margin-top:18px">
+  <div class="panel-head">
+    <div>
+      <h3>Gerenciar administradores</h3>
+      <p class="muted">Promova ou remova permissão de admin pelo e-mail. A pessoa precisa já ter conta criada no site.</p>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 16px">
+    <input id="adminEmailInput" type="email" placeholder="email@exemplo.com" autocomplete="off" style="flex:1;min-width:240px;padding:10px 12px;border:1px solid var(--border,#e0e0e0);border-radius:8px;font-size:14px">
+    <button class="btn btn-primary" onclick="promoteToAdminByEmail()">Promover a admin</button>
+    <button class="btn btn-danger" onclick="demoteFromAdminByEmail()">Remover admin</button>
+  </div>
+</section>
+
+<section class="panel" id="requestsPanel" style="margin-top:18px">
+  <div class="panel-head">
+    <div>
+      <h3>Solicitações de loja</h3>
+      <p class="muted">Pedidos enviados pelo formulário "Quero ser lojista"</p>
+    </div>
+    <button class="btn btn-soft" onclick="loadSellerRequests()">↺ Recarregar</button>
+  </div>
+  <div class="req-filter">
+    <button data-req-filter="pending" class="active" onclick="setReqFilter('pending')">Pendentes <span id="reqCountPending">(0)</span></button>
+    <button data-req-filter="approved" onclick="setReqFilter('approved')">Aprovadas <span id="reqCountApproved">(0)</span></button>
+    <button data-req-filter="rejected" onclick="setReqFilter('rejected')">Rejeitadas <span id="reqCountRejected">(0)</span></button>
+    <button data-req-filter="all" onclick="setReqFilter('all')">Todas <span id="reqCountAll">(0)</span></button>
+  </div>
+  <div class="req-list" id="reqList"><div class="req-empty">Carregando…</div></div>
+</section>
+<p class="muted">Organização e segurança do seu dashboard</p></div></div><div class="settings-grid"><div class="setting-box"><h4>Senha do admin</h4><p>A senha fica no código em <strong>ADMIN_PASSWORD</strong>. Para publicar de verdade, use backend para não deixar a senha visível no HTML.</p></div><div class="setting-box"><h4>Dados reais</h4><p>O painel atual lê <strong>localStorage</strong>. Para ver todos os clientes de qualquer computador, conecte Firebase, Supabase ou outro banco de dados.</p></div><div class="setting-box"><h4>Exportação</h4><p>Use os botões de exportar para baixar CSV com cadastros, compras/interesses ou atividades.</p></div><div class="setting-box"><h4>Privacidade</h4><p>Senhas dos clientes aparecem ocultas no painel. O ideal é salvar senhas criptografadas em um servidor.</p></div></div></section>
+
+<section class="panel sb-section" id="sbPanel">
+  <div class="sb-header">
+    <div>
+      <h3>Dados direto do Supabase</h3>
+      <p class="muted">Tabela lida em tempo real do banco de dados</p>
+    </div>
+    <div class="sb-controls">
+      <span class="sb-status loading" id="sbStatus"><span class="sb-dot"></span>Conectando...</span>
+      <select class="select" id="sbTableSelect" onchange="sbLoadTable()">
+        <option value="jebai_users">jebai_users</option>
+        <option value="jebai_purchases">jebai_purchases</option>
+        <option value="jebai_admin_logs">jebai_admin_logs</option>
+      </select>
+      <input class="search" id="sbSearch" placeholder="Filtrar por qualquer campo..." oninput="sbRender()" style="min-width:200px">
+      <button class="btn btn-soft" onclick="sbLoadTable()">↺ Recarregar</button>
+      <button class="btn" onclick="sbExportCSV()">Exportar CSV</button>
+    </div>
+  </div>
+  <div class="sb-table-wrap">
+    <table class="sb-table">
+      <thead id="sbHead"></thead>
+      <tbody id="sbBody"><tr><td class="sb-empty" colspan="99">Carregando dados do Supabase...</td></tr></tbody>
+    </table>
+  </div>
+  <div class="sb-pagination">
+    <span id="sbCount">0 registros</span>
+    <div class="sb-pagination-btns">
+      <button class="btn" id="sbPrevBtn" onclick="sbPage(-1)" disabled>‹ Anterior</button>
+      <span id="sbPageInfo" style="font-size:13px;color:var(--muted);font-weight:700;align-self:center"></span>
+      <button class="btn" id="sbNextBtn" onclick="sbPage(1)" disabled>Próxima ›</button>
+    </div>
+  </div>
+</section>
+</main></section>
+
+<!-- Modal Aprovar -->
+<div class="modal-overlay" id="approveModal">
+  <div class="modal-box">
+    <h3>Aprovar solicitação</h3>
+    <p>Defina o <strong>slug</strong> (apelido único na URL) da loja. Use letras minúsculas, números e hífen. Ex: <code>bestfit</code>, <code>nova-loja</code>.</p>
+    <label for="approveSlug">Slug da loja</label>
+    <input id="approveSlug" type="text" placeholder="ex: minha-loja" autocomplete="off">
+    <div class="error" id="approveError">Slug inválido ou já em uso.</div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeApproveModal()">Cancelar</button>
+      <button class="btn btn-primary" id="approveConfirmBtn" onclick="confirmApprove()">Aprovar e criar loja</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Rejeitar -->
+<div class="modal-overlay" id="rejectModal">
+  <div class="modal-box">
+    <h3>Rejeitar solicitação</h3>
+    <p>Você pode informar um motivo (opcional). O solicitante verá essa mensagem.</p>
+    <label for="rejectReason">Motivo</label>
+    <textarea id="rejectReason" placeholder="Ex: Documentação incompleta, loja já existente, etc."></textarea>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeRejectModal()">Cancelar</button>
+      <button class="btn btn-danger" id="rejectConfirmBtn" onclick="confirmReject()">Rejeitar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Pronto</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+<script src="auth-utils.js"></script>
+<script src="ui-dialog.js"></script>
+<script>
+  const supabaseClient = JebaiAuth.getClient();
+  window.supabaseClient = supabaseClient;
+
+  async function testarSupabase() {
+    try {
+      const { error } = await supabaseClient.auth.getSession();
+      if (error) { toast('Erro ao conectar no Supabase'); console.warn('Supabase:', error.message); return; }
+      toast('Supabase conectado');
+    } catch (e) { toast('Supabase indisponível'); console.warn(e); }
+  }
+  window.testarSupabase = testarSupabase;
+</script>
+<script>
+let activeTab='users';
+const USERS_TABLE='jebai_users',ORDERS_TABLE='jebai_purchases',LOGS_TABLE='jebai_admin_logs';
+function $(id){return document.getElementById(id)}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function showLoginError(msg){const el=$('loginError');el.textContent=msg||'E-mail ou senha incorretos.';el.style.display='block'}
+async function loginAdmin(){
+  const email=$('adminEmail').value.trim().toLowerCase();
+  const pass=$('adminPass').value;
+  if(!email||!pass){showLoginError('Preencha e-mail e senha.');return}
+  const btn=document.querySelector('#loginScreen .btn-primary');if(btn){btn.disabled=true;btn.textContent='Verificando…'}
+  try{
+    await JebaiAuth.signIn({email,password:pass});
+    // Re-verifica role server-side via requireAdmin (não confia no cache)
+    const adminProfile=await JebaiAuth.requireAdmin();
+    if(!adminProfile){
+      showLoginError('Esta conta não tem permissão de administrador.');
+      return;
+    }
+    $('loginError').style.display='none';$('adminEmail').value='';$('adminPass').value='';
+    openApp();
+  }catch(e){
+    console.warn(e);
+    const m=e.message||'';
+    if(/Invalid login/i.test(m)) showLoginError('E-mail ou senha incorretos.');
+    else if(/Email not confirmed/i.test(m)) showLoginError('Confirme seu e-mail antes de entrar.');
+    else showLoginError('Erro: '+m);
+  }finally{if(btn){btn.disabled=false;btn.textContent='Entrar no Dashboard'}}
+}
+async function logoutAdmin(){await JebaiAuth.signOut();location.reload()}
+// Auto-login: re-verifica role server-side antes de abrir o painel
+async function tryAutoLoginAdmin(){
+  const adminProfile=await JebaiAuth.requireAdmin();
+  if(adminProfile) openApp();
+}
+async function openApp(){$('loginScreen').style.display='none';$('app').style.display='block';await loadSupabaseData();render()}
+function readJSON(k,f=[]){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f))}catch(e){return f}}
+function writeJSON(k,v){localStorage.setItem(k,JSON.stringify(v))}
+async function loadSupabaseData(){if(!window.supabaseClient)return;try{const [u,o,l]=await Promise.all([supabaseClient.from(USERS_TABLE).select('*').order('createdAt',{ascending:false}),supabaseClient.from(ORDERS_TABLE).select('*').order('createdAt',{ascending:false}),supabaseClient.from(LOGS_TABLE).select('*').order('createdAt',{ascending:false})]);if(!u.error&&Array.isArray(u.data))writeJSON('jebai_users',u.data);if(!o.error&&Array.isArray(o.data))writeJSON('jebai_purchases',o.data);if(!l.error&&Array.isArray(l.data))writeJSON('jebai_admin_logs',l.data);if(u.error||o.error||l.error)console.warn('Supabase dashboard:',u.error?.message,o.error?.message,l.error?.message)}catch(e){console.warn('Supabase indisponível:',e)}}
+async function saveSupabaseRow(table,row){if(!window.supabaseClient)return;const {error}=await supabaseClient.from(table).insert([row]);if(error)console.warn('Supabase insert '+table+':',error.message)}
+function rawUsers(){return readJSON('jebai_users',[])}
+function rawOrders(){return readJSON('jebai_purchases',[])}
+function rawLogs(){return readJSON('jebai_admin_logs',[])}
+function addLog(type,msg){const row={type,msg,createdAt:new Date().toISOString()};const logs=rawLogs();logs.unshift(row);writeJSON('jebai_admin_logs',logs.slice(0,80));saveSupabaseRow(LOGS_TABLE,row)}
+function users(){return rawUsers().map((u,i)=>({id:i+1,nome:u.nome||u.name||'',sobrenome:u.sobrenome||'',email:u.email||'',telefone:u.telefone||u.phone||'—',senha:(u.senhaHash||u.senha)?'••••••':'—',createdAt:u.createdAt||u.dataCadastro||'',origem:u.origem||'Cadastro do site'}))}
+function orders(){return rawOrders().map((o,i)=>({id:i+1,product:o.product||o.produto||'Produto',price:o.price||o.preco||'—',code:o.code||o.codigo||'—',store:o.store||o.loja||'—',status:o.status||'Clique de compra',userName:o.userName||o.nome||'Visitante',userEmail:o.userEmail||o.email||'',createdAt:o.createdAt||o.data||'',url:o.url||'#'}))}
+function logs(){return rawLogs().map((l,i)=>({id:i+1,type:l.type||'Sistema',msg:l.msg||'',createdAt:l.createdAt||''}))}
+function brDate(v){if(!v)return '—';try{return new Date(v).toLocaleString('pt-BR')}catch(e){return v}}
+function dayKey(d){try{return new Date(d).toISOString().slice(0,10)}catch(e){return ''}}
+function isToday(d){return dayKey(d)===new Date().toISOString().slice(0,10)}
+function withinDays(d,days){if(!d)return false;return Date.now()-new Date(d).getTime()<=days*86400000}
+function moneyFrom(t){const r=String(t||'').replace(/[^0-9,\.]/g,'').replace(/\.(?=\d{3})/g,'').replace(',','.');const n=parseFloat(r);return isNaN(n)?0:n}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function filtered(rows){const q=($('searchInput')?.value||'').toLowerCase().trim();const f=$('dateFilter')?.value||'all';return rows.filter(x=>{const text=JSON.stringify(x).toLowerCase();const okQ=!q||text.includes(q);const date=x.createdAt;const okD=f==='all'||(f==='today'&&isToday(date))||(f==='7'&&withinDays(date,7))||(f==='30'&&withinDays(date,30));return okQ&&okD})}
+function setTab(t){activeTab=t;$('tabUsers').classList.toggle('active',t==='users');$('tabOrders').classList.toggle('active',t==='orders');$('tabLogs').classList.toggle('active',t==='logs');render()}
+async function refreshDashboard(){await loadSupabaseData();render();toast('Dashboard atualizado')}
+function render(){const u=users(),o=orders(),l=logs();const customers=new Set(o.map(x=>x.userEmail).filter(Boolean));u.forEach(x=>x.email&&customers.add(x.email));$('statUsers').textContent=u.length;$('statOrders').textContent=o.length;$('statCustomers').textContent=customers.size;$('trendUsers').textContent='+'+u.filter(x=>isToday(x.createdAt)).length+' hoje';$('trendOrders').textContent='+'+o.filter(x=>isToday(x.createdAt)).length+' hoje';$('trendCustomers').textContent=customers.size+' identificados';$('miniLogged').textContent=readJSON('jebai_logged',null)?'1':'0';$('miniTopProduct').textContent=topStore(o);$('miniConversion').textContent=u.length?(o.length/u.length).toFixed(1):'0';$('updatedAt').textContent='Atualizado em '+new Date().toLocaleString('pt-BR');renderBars(u,o);renderDonut(u,o,l);renderActivity(u,o,l);if(activeTab==='users')renderUsers(filtered(u));if(activeTab==='orders')renderOrders(filtered(o));if(activeTab==='logs')renderLogs(filtered(l))}
+function topStore(o){if(!o.length)return '—';const map={};o.forEach(x=>{const k=x.store||'—';map[k]=(map[k]||0)+1});return Object.entries(map).sort((a,b)=>b[1]-a[1])[0][0]}
+function renderBars(u,o){const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d)}const max=Math.max(1,...days.map(d=>u.filter(x=>dayKey(x.createdAt)===dayKey(d)).length+o.filter(x=>dayKey(x.createdAt)===dayKey(d)).length));$('bars').innerHTML=days.map(d=>{const n=u.filter(x=>dayKey(x.createdAt)===dayKey(d)).length+o.filter(x=>dayKey(x.createdAt)===dayKey(d)).length;return `<div class="bar-item"><div class="bar" style="height:${Math.max(8,(n/max)*190)}px"><span>${n}</span></div><div class="bar-label">${d.toLocaleDateString('pt-BR',{weekday:'short'}).replace('.','')}</div></div>`}).join('')}
+function renderDonut(u,o,l){const total=Math.max(1,u.length+o.length+l.length);const a=Math.round((u.length/total)*360),b=Math.round((o.length/total)*360),c=Math.round((l.length/total)*360);$('donut').style.background=`conic-gradient(var(--teal) 0deg ${a}deg,var(--yellow) ${a}deg ${a+b}deg,var(--purple) ${a+b}deg ${a+b+c}deg,var(--line) ${a+b+c}deg 360deg)`;$('legend').innerHTML=`<div class="legend-row"><span><i class="dot"></i>Cadastros</span><strong>${u.length}</strong></div><div class="legend-row"><span><i class="dot yellow"></i>Cliques nas lojas</span><strong>${o.length}</strong></div><div class="legend-row"><span><i class="dot purple"></i>Atividades</span><strong>${l.length}</strong></div><div class="legend-row"><span><i class="dot gray"></i>Outros</span><strong>${Math.max(0,total-u.length-o.length-l.length)}</strong></div>`}
+function renderActivity(u,o,l){let items=[];u.slice(-3).reverse().forEach(x=>items.push({icon:'U',title:'Novo cadastro',meta:`${x.nome} ${x.sobrenome} • ${brDate(x.createdAt)}`,when:x.createdAt}));o.slice(-3).reverse().forEach(x=>items.push({icon:'L',title:'Clique em loja',meta:`${x.store||x.product} • ${x.userEmail||'visitante'} • ${brDate(x.createdAt)}`,when:x.createdAt}));l.slice(0,4).forEach(x=>items.push({icon:'!',title:x.type,meta:`${x.msg} • ${brDate(x.createdAt)}`,when:x.createdAt}));items=items.sort((a,b)=>new Date(b.when||0)-new Date(a.when||0)).slice(0,8);$('activityList').innerHTML=items.length?items.map(x=>`<div class="activity-item"><div class="activity-icon">${esc(x.icon)}</div><div><div class="activity-title">${esc(x.title)}</div><div class="activity-meta">${esc(x.meta)}</div></div></div>`).join(''):'<div class="empty">Nenhuma atividade ainda.</div>'}
+function renderUsers(rows){$('tableHead').innerHTML='<tr><th>#</th><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Senha</th><th>Data</th><th>Origem</th></tr>';$('tableBody').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.id}</td><td><strong>${esc((r.nome+' '+r.sobrenome).trim()||'Sem nome')}</strong></td><td>${esc(r.email||'—')}</td><td>${esc(r.telefone)}</td><td>${esc(r.senha)}</td><td>${brDate(r.createdAt)}</td><td><span class="pill pill-blue">${esc(r.origem)}</span></td></tr>`).join(''):`<tr><td colspan="7" class="empty">Nenhum cadastro encontrado.</td></tr>`}
+function renderOrders(rows){$('tableHead').innerHTML='<tr><th>#</th><th>Visitante</th><th>Item / Página</th><th>Loja</th><th>Status</th><th>Data</th></tr>';$('tableBody').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.id}</td><td><strong>${esc(r.userName)}</strong><br><small>${esc(r.userEmail||'sem login')}</small></td><td><strong>${esc(r.product)}</strong>${r.code&&r.code!=='—'?`<br><small>Cód: ${esc(r.code)}</small>`:''}</td><td>${esc(r.store)}</td><td><span class="pill pill-green">${esc(r.status)}</span></td><td>${brDate(r.createdAt)}</td></tr>`).join(''):`<tr><td colspan="6" class="empty">Nenhum clique registrado ainda.</td></tr>`}
+function renderLogs(rows){$('tableHead').innerHTML='<tr><th>#</th><th>Tipo</th><th>Mensagem</th><th>Data</th></tr>';$('tableBody').innerHTML=rows.length?rows.map(r=>`<tr><td>${r.id}</td><td><span class="pill pill-orange">${esc(r.type)}</span></td><td>${esc(r.msg)}</td><td>${brDate(r.createdAt)}</td></tr>`).join(''):`<tr><td colspan="4" class="empty">Nenhuma atividade registrada.</td></tr>`}
+function exportCSV(type){const rows=type==='users'?users():type==='orders'?orders():logs();if(!rows.length){UIDialog.uiAlert({title:'Nada pra exportar',message:'Não há dados para exportar nesta aba.'});return}const h=Object.keys(rows[0]);const csv=[h.join(';')].concat(rows.map(r=>h.map(x=>'"'+String(r[x]??'').replace(/"/g,'""')+'"').join(';'))).join('\n');const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(type==='users'?'cadastros':type==='orders'?'compras':'atividades')+'-jebai.csv';a.click();URL.revokeObjectURL(a.href);addLog('Exportação','Arquivo CSV exportado: '+type);render()}
+async function clearAllData(){
+  const ok=await UIDialog.uiConfirm({title:'Limpar dados locais',message:'Apagar cadastros, compras e atividades salvos neste navegador? Os dados continuam no Supabase.',confirmText:'Limpar',danger:true});
+  if(!ok)return;
+  localStorage.removeItem('jebai_users');localStorage.removeItem('jebai_purchases');localStorage.removeItem('jebai_admin_logs');
+  render();toast('Dados limpos no navegador. Para apagar no Supabase, exclua pelas tabelas.');
+}
+async function seedExampleData(){const names=['Ana Silva','Lucas Rocha','Marcos Lima','Julia Santos','Pedro Alves'];const products=['iPhone 15','Notebook gamer','Fone bluetooth','Smart TV','Console videogame'];let u=rawUsers(),o=rawOrders();for(let i=0;i<5;i++){const [nome,sobrenome]=names[i].split(' ');const d=new Date();d.setDate(d.getDate()-i);if(!u.find(x=>x.email===nome.toLowerCase()+'@exemplo.com')){u.push({nome,sobrenome,email:nome.toLowerCase()+'@exemplo.com',telefone:'(45) 99999-000'+i,role:'cliente',createdAt:d.toISOString(),origem:'Exemplo'})}o.push({product:products[i],price:'$'+(120+i*85),code:'EX-00'+i,store:i%2?'Jebai Center':'Tchê Loco',status:'Clique de compra',userName:names[i],userEmail:nome.toLowerCase()+'@exemplo.com',createdAt:d.toISOString(),url:'#'})}writeJSON('jebai_users',u);writeJSON('jebai_purchases',o);u.slice(-5).forEach(row=>saveSupabaseRow(USERS_TABLE,row));o.slice(-5).forEach(row=>saveSupabaseRow(ORDERS_TABLE,row));addLog('Teste','Dados de exemplo adicionados');render();toast('Dados de teste adicionados')}
+function isExampleUser(u){return u.origem==='Exemplo'||(u.email||'').endsWith('@exemplo.com')}
+function isExampleOrder(o){return /^EX-/.test(o.code||'')||(o.userEmail||'').endsWith('@exemplo.com')}
+async function clearExampleData(){
+  const ok=await UIDialog.uiConfirm({title:'Apagar dados de teste',message:'Apagar todos os dados de teste (cadastros @exemplo.com e cliques EX-*) do navegador e do Supabase?',confirmText:'Apagar',danger:true});
+  if(!ok)return;
+  const u=rawUsers().filter(x=>!isExampleUser(x));
+  const o=rawOrders().filter(x=>!isExampleOrder(x));
+  writeJSON('jebai_users',u);writeJSON('jebai_purchases',o);
+  if(window.supabaseClient){
+    try{
+      await supabaseClient.from(USERS_TABLE).delete().or('origem.eq.Exemplo,email.like.%@exemplo.com');
+      await supabaseClient.from(ORDERS_TABLE).delete().or('code.like.EX-%,userEmail.like.%@exemplo.com');
+    }catch(e){console.warn('Supabase delete:',e);toast('Dados removidos no navegador, mas falhou no Supabase');addLog('Limpeza','Falha ao apagar dados de teste no Supabase: '+e.message);render();return}
+  }
+  addLog('Limpeza','Dados de teste apagados');render();toast('Dados de teste apagados')
+}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&$('loginScreen').style.display!=='none')loginAdmin()});tryAutoLoginAdmin();
+
+/* ── SUPABASE LIVE TABLE ── */
+let sbAllRows=[];let sbCurrentPage=1;const SB_PAGE_SIZE=20;
+
+async function sbLoadTable(){
+  const table=$('sbTableSelect').value;
+  const status=$('sbStatus');
+  status.className='sb-status loading';
+  status.innerHTML='<span class="sb-dot"></span>Carregando...';
+  $('sbBody').innerHTML='<tr><td class="sb-empty" colspan="99">Buscando dados...</td></tr>';
+  $('sbHead').innerHTML='';
+  if(!window.supabaseClient){
+    status.className='sb-status error';
+    status.innerHTML='<span class="sb-dot"></span>Supabase indisponível';
+    $('sbBody').innerHTML='<tr><td class="sb-empty" colspan="99">Cliente Supabase não encontrado.</td></tr>';
+    return;
+  }
+  try{
+    const {data,error}=await supabaseClient.from(table).select('*').order('createdAt',{ascending:false}).limit(500);
+    if(error){throw new Error(error.message)}
+    sbAllRows=Array.isArray(data)?data:[];
+    sbCurrentPage=1;
+    status.className='sb-status';
+    status.innerHTML='<span class="sb-dot"></span>Conectado — '+table;
+    sbRender();
+  }catch(e){
+    status.className='sb-status error';
+    status.innerHTML='<span class="sb-dot"></span>Erro: '+esc(e.message);
+    $('sbBody').innerHTML='<tr><td class="sb-empty" colspan="99">Não foi possível carregar: '+esc(e.message)+'</td></tr>';
+    $('sbCount').textContent='0 registros';
+  }
+}
+
+function sbRender(){
+  const q=($('sbSearch')?.value||'').toLowerCase().trim();
+  const filtered=q?sbAllRows.filter(r=>JSON.stringify(r).toLowerCase().includes(q)):sbAllRows;
+  const total=filtered.length;
+  const totalPages=Math.max(1,Math.ceil(total/SB_PAGE_SIZE));
+  if(sbCurrentPage>totalPages)sbCurrentPage=totalPages;
+  const start=(sbCurrentPage-1)*SB_PAGE_SIZE;
+  const page=filtered.slice(start,start+SB_PAGE_SIZE);
+  $('sbCount').textContent=total+' registro'+(total!==1?'s':'')+(q?' (filtrado)':'');
+  $('sbPageInfo').textContent='Página '+sbCurrentPage+' de '+totalPages;
+  $('sbPrevBtn').disabled=sbCurrentPage<=1;
+  $('sbNextBtn').disabled=sbCurrentPage>=totalPages;
+  if(!page.length){
+    $('sbHead').innerHTML='';
+    $('sbBody').innerHTML='<tr><td class="sb-empty" colspan="99">Nenhum registro encontrado.</td></tr>';
+    return;
+  }
+  const cols=Object.keys(page[0]);
+  $('sbHead').innerHTML='<tr>'+cols.map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr>';
+  $('sbBody').innerHTML=page.map(r=>'<tr>'+cols.map(c=>{
+    let v=r[c];
+    if(v===null||v===undefined)return '<td style="color:var(--muted)">—</td>';
+    if(typeof v==='object')v=JSON.stringify(v);
+    v=String(v);
+    // Format dates nicely
+    if(/^\d{4}-\d{2}-\d{2}T/.test(v)){try{v=new Date(v).toLocaleString('pt-BR')}catch(e){}}
+    // Mask credentials
+    const lc=c.toLowerCase();
+    if(lc==='senha'||lc==='password'||lc==='senhahash'||lc==='senhasalt'||lc.includes('token'))v='••••••';
+    return '<td title="'+esc(v)+'">'+esc(v)+'</td>';
+  }).join('')+'</tr>').join('');
+}
+
+function sbPage(dir){sbCurrentPage+=dir;sbRender()}
+
+function sbExportCSV(){
+  if(!sbAllRows.length){UIDialog.uiAlert({title:'Nada pra exportar',message:'Não há dados na tabela atual.'});return}
+  const h=Object.keys(sbAllRows[0]);
+  const csv=[h.join(';')].concat(sbAllRows.map(r=>h.map(x=>'"'+String(r[x]??'').replace(/"/g,'""')+'"').join(';'))).join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='supabase-'+$('sbTableSelect').value+'.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('CSV exportado');
+}
+
+// Load Supabase table after app opens
+const _origOpenApp=openApp;
+window.openApp=async function(){
+  await _origOpenApp();
+  setTimeout(sbLoadTable,500);
+  loadSellerRequests();
+  loadStores();
+  loadStaticVisibility();
+};
+
+/* ── SOLICITAÇÕES DE LOJA ── */
+let _allRequests=[];let _reqFilter='pending';let _approveTargetId=null;let _rejectTargetId=null;
+const REQ_TABLE='jebai_seller_requests';
+const STORES_TABLE='jebai_stores';
+
+async function loadSellerRequests(){
+  const list=$('reqList');list.innerHTML='<div class="req-empty">Carregando…</div>';
+  try{
+    const {data,error}=await supabaseClient.from(REQ_TABLE).select('*').order('created_at',{ascending:false});
+    if(error)throw error;
+    _allRequests=data||[];
+    updateReqCounts();
+    renderRequests();
+  }catch(e){
+    console.warn(e);
+    list.innerHTML='<div class="req-empty">Erro ao carregar: '+esc(e.message)+'</div>';
+  }
+}
+function updateReqCounts(){
+  const c={pending:0,approved:0,rejected:0,all:_allRequests.length};
+  _allRequests.forEach(r=>{if(c[r.status]!==undefined)c[r.status]++});
+  $('reqCountPending').textContent='('+c.pending+')';
+  $('reqCountApproved').textContent='('+c.approved+')';
+  $('reqCountRejected').textContent='('+c.rejected+')';
+  $('reqCountAll').textContent='('+c.all+')';
+}
+function setReqFilter(f){
+  _reqFilter=f;
+  document.querySelectorAll('[data-req-filter]').forEach(b=>b.classList.toggle('active',b.dataset.reqFilter===f));
+  renderRequests();
+}
+function renderRequests(){
+  const list=$('reqList');
+  const rows=_reqFilter==='all'?_allRequests:_allRequests.filter(r=>r.status===_reqFilter);
+  if(!rows.length){list.innerHTML='<div class="req-empty">Nenhuma solicitação '+(_reqFilter==='all'?'':'em "'+_reqFilter+'"')+'.</div>';return}
+  list.innerHTML=rows.map(r=>{
+    const pillCls=r.status==='approved'?'req-approved':r.status==='rejected'?'req-rejected':'req-pending';
+    const pillTxt=r.status==='approved'?'Aprovada':r.status==='rejected'?'Rejeitada':'Pendente';
+    const actions=r.status==='pending'
+      ? `<button class="btn btn-primary" onclick="openApproveModal('${r.id}')">Aprovar</button>
+         <button class="btn btn-danger" onclick="openRejectModal('${r.id}')">Rejeitar</button>`
+      : r.status==='approved'
+        ? `<button class="btn btn-primary" onclick="openApproveModal('${r.id}')">Recriar loja</button>
+           <button class="btn btn-soft" onclick="promoteOwnerToVendedor('${esc(r.email)}',this)">Promover a vendedor</button>
+           <button class="btn btn-danger" onclick="demoteOwnerToCliente('${esc(r.email)}',this)">Remover vendedor</button>`
+        : (r.status==='rejected'&&r.rejection_reason?'<small style="color:var(--muted)"><strong>Motivo:</strong> '+esc(r.rejection_reason)+'</small>':'');
+    return `<div class="req-card">
+      <div class="req-head">
+        <h4>${esc(r.nome_loja)}<small>por ${esc(r.nome_solicitante||r.email)}</small></h4>
+        <span class="req-status-pill ${pillCls}">${pillTxt}</span>
+      </div>
+      <div class="req-meta">
+        <div><strong>E-mail</strong>${esc(r.email)}</div>
+        ${r.telefone?`<div><strong>Telefone</strong>${esc(r.telefone)}</div>`:''}
+        ${r.whatsapp?`<div><strong>WhatsApp</strong>${esc(r.whatsapp)}</div>`:''}
+        ${r.instagram?`<div><strong>Instagram</strong>${esc(r.instagram)}</div>`:''}
+        <div><strong>Enviado em</strong>${brDate(r.created_at)}</div>
+        ${r.reviewed_at?`<div><strong>Avaliado em</strong>${brDate(r.reviewed_at)}</div>`:''}
+      </div>
+      ${r.descricao?`<div class="req-desc">${esc(r.descricao)}</div>`:''}
+      <div class="req-actions">${actions}</div>
+    </div>`;
+  }).join('');
+}
+
+async function promoteToAdminByEmail(){
+  const email=($('adminEmailInput').value||'').trim().toLowerCase();
+  if(!email||!/.+@.+\..+/.test(email)){toast('Informe um e-mail válido');return}
+  const ok=await UIDialog.uiConfirm({title:'Promover a admin',message:'Promover '+email+' ao papel de ADMIN?\n\nAdmins têm acesso total: aprovar lojas, gerenciar usuários e promover/remover outros admins.',confirmText:'Promover a admin',danger:true});
+  if(!ok)return;
+  try{
+    const {data,error}=await supabaseClient.from('jebai_users').update({role:'admin'}).eq('email',email).select();
+    if(error)throw error;
+    if(!data||!data.length)throw new Error('Usuário não encontrado. A pessoa precisa criar a conta primeiro em login.html.');
+    addLog('Promoção','Usuário promovido a admin: '+email);
+    toast('✓ '+email+' agora é admin');
+    $('adminEmailInput').value='';
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+(e.message||'falhou'));
+  }
+}
+async function demoteFromAdminByEmail(){
+  const email=($('adminEmailInput').value||'').trim().toLowerCase();
+  if(!email||!/.+@.+\..+/.test(email)){toast('Informe um e-mail válido');return}
+  const myEmail=((await JebaiAuth.getCurrentSession())?.user?.email||'').toLowerCase();
+  if(email===myEmail){toast('Você não pode remover seu próprio admin — peça pra outro admin fazer isso');return}
+  const ok=await UIDialog.uiConfirm({title:'Remover admin',message:'Remover o papel de admin de '+email+'?\n\nSe a pessoa for dona de alguma loja, ela vira vendedor (mantém acesso ao painel da loja). Caso contrário, vira cliente comum.',confirmText:'Remover admin',danger:true});
+  if(!ok)return;
+  try{
+    const {data:storeOwn}=await supabaseClient.from('jebai_stores').select('id').eq('owner_email',email).limit(1);
+    const newRole=(storeOwn&&storeOwn.length)?'vendedor':'cliente';
+    const {data,error}=await supabaseClient.from('jebai_users').update({role:newRole}).eq('email',email).select();
+    if(error)throw error;
+    if(!data||!data.length)throw new Error('Usuário não encontrado.');
+    addLog('Despromoção','Admin removido (virou '+newRole+'): '+email);
+    toast('✓ '+email+' agora é '+newRole);
+    $('adminEmailInput').value='';
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+(e.message||'falhou'));
+  }
+}
+async function promoteOwnerToVendedor(email,btn){
+  if(!email)return;
+  const ok=await UIDialog.uiConfirm({title:'Promover a vendedor',message:'Promover '+email+' ao papel de vendedor? Isso libera o painel da loja para essa conta.',confirmText:'Promover'});
+  if(!ok)return;
+  const orig=btn?btn.textContent:'';
+  if(btn){btn.disabled=true;btn.textContent='Promovendo…'}
+  try{
+    let roleErr;
+    const rpc=await supabaseClient.rpc('promote_to_vendedor',{target_email:email});
+    if(rpc.error){
+      const direct=await supabaseClient.from('jebai_users').update({role:'vendedor'}).eq('email',email).neq('role','admin').select();
+      roleErr=direct.error;
+    }
+    if(roleErr)throw roleErr;
+    addLog('Promoção','Usuário promovido a vendedor: '+email);
+    toast('✓ '+email+' agora é vendedor');
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+(e.message||'falhou'),'error');
+  }finally{if(btn){btn.disabled=false;btn.textContent=orig}}
+}
+async function demoteOwnerToCliente(email,btn){
+  if(!email)return;
+  const ok=await UIDialog.uiConfirm({title:'Remover vendedor',message:'Remover o papel de vendedor de '+email+'?\n\nEla perde o acesso ao painel da loja, mas a loja em si NÃO é apagada (você pode ocultar ou excluir pela aba "Lojas").',confirmText:'Remover',danger:true});
+  if(!ok)return;
+  const orig=btn?btn.textContent:'';
+  if(btn){btn.disabled=true;btn.textContent='Removendo…'}
+  try{
+    const {error,data}=await supabaseClient.from('jebai_users').update({role:'cliente'}).eq('email',email).neq('role','admin').select();
+    if(error)throw error;
+    if(!data||!data.length)throw new Error('Usuário não encontrado ou é admin (não pode ser rebaixado).');
+    addLog('Despromoção','Vendedor removido: '+email);
+    toast('✓ '+email+' voltou a ser cliente');
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+(e.message||'falhou'),'error');
+  }finally{if(btn){btn.disabled=false;btn.textContent=orig}}
+}
+function openApproveModal(id){
+  _approveTargetId=id;
+  const req=_allRequests.find(r=>r.id===id);
+  // Pré-preenche slug a partir do nome da loja
+  const suggested=(req?.nome_loja||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+  $('approveSlug').value=suggested;
+  $('approveError').style.display='none';
+  $('approveModal').classList.add('active');
+  setTimeout(()=>$('approveSlug').focus(),50);
+}
+function closeApproveModal(){$('approveModal').classList.remove('active');_approveTargetId=null}
+async function confirmApprove(){
+  if(!_approveTargetId)return;
+  const slug=$('approveSlug').value.trim().toLowerCase();
+  if(!/^[a-z0-9][a-z0-9-]{1,40}$/.test(slug)){
+    $('approveError').textContent='Slug inválido. Use letras minúsculas, números e hífen (3 a 40 caracteres).';
+    $('approveError').style.display='block';
+    return;
+  }
+  const req=_allRequests.find(r=>r.id===_approveTargetId);
+  if(!req){closeApproveModal();return}
+  const btn=$('approveConfirmBtn');btn.disabled=true;const orig=btn.textContent;btn.textContent='Aprovando…';
+  try{
+    // 1. Verifica se slug está livre
+    const {data:slugCheck}=await supabaseClient.from(STORES_TABLE).select('slug').eq('slug',slug).maybeSingle();
+    if(slugCheck){throw new Error('Slug "'+slug+'" já está em uso. Escolha outro.')}
+    // 2. Promove usuário a vendedor PRIMEIRO (se isso falhar, não cria loja órfã).
+    //    Tenta RPC; se a função não existir, cai pro UPDATE direto (admin tem permissão via RLS).
+    let roleErr;
+    const rpc=await supabaseClient.rpc('promote_to_vendedor',{target_email:req.email});
+    if(rpc.error){
+      const direct=await supabaseClient.from('jebai_users').update({role:'vendedor'}).eq('email',req.email).neq('role','admin').select();
+      roleErr=direct.error;
+    }
+    if(roleErr)throw new Error('Falha ao promover usuário a vendedor: '+roleErr.message);
+    // 3. Cria a loja em status draft
+    const storeRow={
+      slug,
+      owner_email:req.email,
+      nome:req.nome_loja,
+      descricao:req.descricao||'',
+      telefone:req.telefone||null,
+      whatsapp:req.whatsapp||null,
+      instagram:req.instagram||null,
+      status:'draft'
+    };
+    const {error:storeErr}=await supabaseClient.from(STORES_TABLE).insert([storeRow]);
+    if(storeErr)throw storeErr;
+    // 4. Marca solicitação como aprovada
+    const {error:reqErr}=await supabaseClient.from(REQ_TABLE).update({status:'approved',reviewed_at:new Date().toISOString(),reviewed_by:(await JebaiAuth.getCurrentSession())?.user?.email}).eq('id',_approveTargetId);
+    if(reqErr)throw reqErr;
+    addLog('Aprovação','Loja aprovada: '+req.nome_loja+' (slug: '+slug+', dono: '+req.email+')');
+    toast('✓ Loja aprovada e criada como rascunho');
+    closeApproveModal();
+    loadSellerRequests();
+  }catch(e){
+    console.warn(e);
+    $('approveError').textContent='Erro: '+e.message;
+    $('approveError').style.display='block';
+  }finally{btn.disabled=false;btn.textContent=orig}
+}
+
+function openRejectModal(id){_rejectTargetId=id;$('rejectReason').value='';$('rejectModal').classList.add('active');setTimeout(()=>$('rejectReason').focus(),50)}
+function closeRejectModal(){$('rejectModal').classList.remove('active');_rejectTargetId=null}
+async function confirmReject(){
+  if(!_rejectTargetId)return;
+  const reason=$('rejectReason').value.trim();
+  const btn=$('rejectConfirmBtn');btn.disabled=true;const orig=btn.textContent;btn.textContent='Rejeitando…';
+  try{
+    const {error}=await supabaseClient.from(REQ_TABLE).update({status:'rejected',rejection_reason:reason||null,reviewed_at:new Date().toISOString(),reviewed_by:(await JebaiAuth.getCurrentSession())?.user?.email}).eq('id',_rejectTargetId);
+    if(error)throw error;
+    const req=_allRequests.find(r=>r.id===_rejectTargetId);
+    addLog('Rejeição','Loja rejeitada: '+(req?.nome_loja||_rejectTargetId)+(reason?' — '+reason:''));
+    toast('Solicitação rejeitada');
+    closeRejectModal();
+    loadSellerRequests();
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+e.message);
+  }finally{btn.disabled=false;btn.textContent=orig}
+}
+// Fechar modal clicando fora
+['approveModal','rejectModal'].forEach(id=>{const m=$(id);if(m)m.addEventListener('click',e=>{if(e.target===m){if(id==='approveModal')closeApproveModal();else closeRejectModal();}})});
+
+/* ── LOJAS (publicação) ── */
+let _allStores=[];let _storeFilter='pending_review';
+async function loadStores(){
+  const list=$('storeList');list.innerHTML='<div class="req-empty">Carregando…</div>';
+  try{
+    const {data,error}=await supabaseClient.from(STORES_TABLE).select('*').order('updated_at',{ascending:false});
+    if(error)throw error;
+    _allStores=data||[];
+    updateStoreCounts();
+    renderStores();
+  }catch(e){
+    console.warn(e);
+    list.innerHTML='<div class="req-empty">Erro: '+esc(e.message)+'</div>';
+  }
+}
+function updateStoreCounts(){
+  const c={draft:0,pending_review:0,published:0,hidden:0,all:_allStores.length};
+  _allStores.forEach(s=>{if(c[s.status]!==undefined)c[s.status]++});
+  $('storeCountPending').textContent='('+c.pending_review+')';
+  $('storeCountPublished').textContent='('+c.published+')';
+  $('storeCountDraft').textContent='('+c.draft+')';
+  $('storeCountHidden').textContent='('+c.hidden+')';
+  $('storeCountAll').textContent='('+c.all+')';
+}
+function setStoreFilter(f){
+  _storeFilter=f;
+  document.querySelectorAll('[data-store-filter]').forEach(b=>b.classList.toggle('active',b.dataset.storeFilter===f));
+  renderStores();
+}
+function renderStores(){
+  const list=$('storeList');
+  const rows=_storeFilter==='all'?_allStores:_allStores.filter(s=>s.status===_storeFilter);
+  if(!rows.length){list.innerHTML='<div class="req-empty">Nenhuma loja '+(_storeFilter==='all'?'':'em "'+_storeFilter+'"')+'.</div>';return}
+  list.innerHTML=rows.map(s=>{
+    const pillCls={draft:'req-pending',pending_review:'req-pending',published:'req-approved',hidden:'req-rejected'}[s.status]||'req-pending';
+    const pillTxt={draft:'Rascunho',pending_review:'Aguardando',published:'Publicada',hidden:'Oculta'}[s.status]||s.status;
+    let actions='';
+    if(s.status==='pending_review'){
+      actions=`<button class="btn btn-primary" onclick="setStoreStatus('${s.id}','published')">Publicar</button>
+               <button class="btn btn-danger" onclick="setStoreStatus('${s.id}','draft')">Rejeitar</button>`;
+    }else if(s.status==='published'){
+      actions=`<button class="btn btn-danger" onclick="setStoreStatus('${s.id}','hidden')">Ocultar</button>`;
+    }else if(s.status==='hidden'||s.status==='draft'){
+      actions=`<button class="btn btn-primary" onclick="setStoreStatus('${s.id}','published')">Publicar agora</button>`;
+    }
+    actions+=` <a class="btn" href="loja-template.html?slug=${encodeURIComponent(s.slug)}" target="_blank" rel="noopener noreferrer">Pré-visualizar</a>
+              <a class="btn btn-soft" href="vendedor.html?slug=${encodeURIComponent(s.slug)}" target="_blank" rel="noopener noreferrer">Editar</a>
+              <button class="btn btn-danger" onclick="deleteStore('${s.id}')">Excluir</button>`;
+    return `<div class="req-card">
+      <div class="req-head">
+        <h4>${esc(s.nome)}<small>slug: ${esc(s.slug)} • dono: ${esc(s.owner_email)}</small></h4>
+        <span class="req-status-pill ${pillCls}">${pillTxt}</span>
+      </div>
+      <div class="req-meta">
+        ${s.telefone?`<div><strong>Telefone</strong>${esc(s.telefone)}</div>`:''}
+        ${s.whatsapp?`<div><strong>WhatsApp</strong>${esc(s.whatsapp)}</div>`:''}
+        ${s.instagram?`<div><strong>Instagram</strong>${esc(s.instagram)}</div>`:''}
+        ${s.endereco?`<div><strong>Endereço</strong>${esc(s.endereco)}</div>`:''}
+        ${s.publish_requested_at?`<div><strong>Pediu publicação</strong>${brDate(s.publish_requested_at)}</div>`:''}
+        ${s.published_at?`<div><strong>Publicada em</strong>${brDate(s.published_at)}</div>`:''}
+        <div><strong>Atualizada em</strong>${brDate(s.updated_at)}</div>
+      </div>
+      ${s.descricao?`<div class="req-desc">${esc(s.descricao)}</div>`:''}
+      <div class="req-actions">${actions}</div>
+    </div>`;
+  }).join('');
+}
+async function setStoreStatus(id,newStatus){
+  const labels={published:'publicar',draft:'rejeitar pedido',hidden:'ocultar'};
+  const verb=labels[newStatus]||newStatus;
+  const ok=await UIDialog.uiConfirm({title:'Alterar status da loja',message:'Tem certeza que deseja '+verb+' esta loja?',confirmText:verb.charAt(0).toUpperCase()+verb.slice(1),danger:newStatus!=='published'});
+  if(!ok)return;
+  try{
+    const updates={status:newStatus,updated_at:new Date().toISOString()};
+    if(newStatus==='published')updates.published_at=new Date().toISOString();
+    const {error}=await supabaseClient.from(STORES_TABLE).update(updates).eq('id',id);
+    if(error)throw error;
+    const s=_allStores.find(x=>x.id===id);
+    addLog('Loja',(labels[newStatus]||newStatus).toUpperCase()+': '+(s?.nome||id));
+    toast('Status atualizado: '+newStatus);
+    loadStores();
+    loadStaticVisibility();
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+e.message);
+  }
+}
+
+/* ── VISIBILIDADE DAS LOJAS ESTÁTICAS NA HOME ── */
+const STATIC_STORES=[
+  {slug:'loja-atacado-connect',nome:'Atacado Connect',desc:'Eletrônicos, celulares e acessórios desde 1995.'},
+  {slug:'loja-dior',nome:'Farma Shop Dior',desc:'Suplementos, vitaminas e cosméticos importados.'},
+  {slug:'loja-best-shop',nome:'Best Shop PY',desc:'Games, consoles e tecnologia premium.'},
+  {slug:'loja-usa',nome:'Atacado Import US',desc:'Produtos originais importados direto dos EUA.'},
+  {slug:'loja-atlantico',nome:'Atlântico Shop',desc:'Eletrônicos, malas e ferramentas profissionais.'},
+  {slug:'loja-tche-loco',nome:'Tchê Loco',desc:'Gadgets e eletrônicos com os melhores preços.'},
+  {slug:'loja-oneclick',nome:'OneClick',desc:'Ferramentas e soluções técnicas profissionais.'},
+  {slug:'loja-bestfit',nome:'Bestfit Suplem.',desc:'Suplementação de alta performance para seu treino.'}
+];
+// Estado por slug: {state: 'visible'|'hidden'|'deleted'}
+let _staticState=new Map();
+let _dynamicHomeStores=[];
+async function loadStaticVisibility(){
+  const list=$('staticStoresList');list.innerHTML='<div class="req-empty">Carregando…</div>';
+  try{
+    // Estáticas
+    const {data:hiddenRows,error}=await supabaseClient.from('jebai_home_hidden_stores').select('slug,deleted');
+    if(error)throw error;
+    _staticState=new Map();
+    (hiddenRows||[]).forEach(r=>_staticState.set(r.slug,r.deleted?'deleted':'hidden'));
+    // Dinâmicas (só as que são "elegíveis" pra aparecer na home: published ou hidden)
+    const {data:dyn,error:dynErr}=await supabaseClient.from(STORES_TABLE)
+      .select('id,slug,nome,descricao,status,owner_email,logo_url')
+      .in('status',['published','hidden']);
+    if(dynErr)throw dynErr;
+    _dynamicHomeStores=dyn||[];
+    renderStaticVisibility();
+  }catch(e){
+    console.warn(e);
+    list.innerHTML='<div class="req-empty">Erro: '+esc(e.message)+'</div>';
+  }
+}
+function renderStaticVisibility(){
+  const list=$('staticStoresList');
+  // Cards das estáticas
+  const staticHtml=STATIC_STORES.map(s=>{
+    const st=_staticState.get(s.slug)||'visible';
+    const labels={visible:'VISÍVEL',hidden:'OCULTA',deleted:'DELETADA'};
+    const clss={visible:'req-approved',hidden:'req-pending',deleted:'req-rejected'};
+    let btns='';
+    if(st==='visible'){
+      btns=`<button class="btn btn-soft" onclick="setStaticState('${s.slug}','hidden')">Ocultar da home</button>
+            <button class="btn btn-danger" onclick="setStaticState('${s.slug}','deleted')">Deletar da home</button>`;
+    }else if(st==='hidden'){
+      btns=`<button class="btn btn-primary" onclick="setStaticState('${s.slug}','visible')">Mostrar na home</button>
+            <button class="btn btn-danger" onclick="setStaticState('${s.slug}','deleted')">Deletar da home</button>`;
+    }else{
+      btns=`<button class="btn btn-primary" onclick="setStaticState('${s.slug}','visible')">Restaurar</button>`;
+    }
+    return `<div class="req-card">
+      <div class="req-head">
+        <h4>${esc(s.nome)}<small>fixa · ${esc(s.slug)}.html</small></h4>
+        <span class="req-status-pill ${clss[st]}">${labels[st]}</span>
+      </div>
+      <div class="req-desc" style="margin-bottom:10px">${esc(s.desc)}</div>
+      <div class="req-actions">${btns} <a class="btn" href="${esc(s.slug)}.html" target="_blank" rel="noopener noreferrer">Pré-visualizar</a></div>
+    </div>`;
+  }).join('');
+  // Cards das dinâmicas (de vendedores)
+  const dynamicHtml=_dynamicHomeStores.map(s=>{
+    const isHidden=s.status==='hidden';
+    const label=isHidden?'OCULTA':'VISÍVEL';
+    const cls=isHidden?'req-pending':'req-approved';
+    let btns='';
+    if(isHidden){
+      btns=`<button class="btn btn-primary" onclick="setStoreStatus('${s.id}','published')">Mostrar na home</button>
+            <button class="btn btn-danger" onclick="deleteStore('${s.id}')">Deletar da home</button>`;
+    }else{
+      btns=`<button class="btn btn-soft" onclick="setStoreStatus('${s.id}','hidden')">Ocultar da home</button>
+            <button class="btn btn-danger" onclick="deleteStore('${s.id}')">Deletar da home</button>`;
+    }
+    return `<div class="req-card">
+      <div class="req-head">
+        <h4>${esc(s.nome)}<small>vendedor · ${esc(s.slug)} · ${esc(s.owner_email)}</small></h4>
+        <span class="req-status-pill ${cls}">${label}</span>
+      </div>
+      <div class="req-desc" style="margin-bottom:10px">${esc(s.descricao||'(sem descrição)')}</div>
+      <div class="req-actions">${btns} <a class="btn" href="loja-template.html?slug=${encodeURIComponent(s.slug)}" target="_blank" rel="noopener noreferrer">Pré-visualizar</a> <a class="btn btn-soft" href="vendedor.html?slug=${encodeURIComponent(s.slug)}" target="_blank" rel="noopener noreferrer">Editar</a></div>
+    </div>`;
+  }).join('');
+  list.innerHTML=staticHtml+dynamicHtml || '<div class="req-empty">Nenhuma loja na home.</div>';
+}
+async function setStaticState(slug,newState){
+  const verb={visible:'restaurar',hidden:'ocultar',deleted:'deletar'}[newState];
+  if(newState==='deleted'){
+    const ok=await UIDialog.uiConfirm({title:'Deletar da home',message:'Deletar "'+slug+'" da home?\n\nO card vai sumir da página inicial. A página direta da loja ('+slug+'.html) continua existindo.\n\nAinda dá pra reverter clicando em "Restaurar" depois.',confirmText:'Quero deletar',danger:true});
+    if(!ok)return;
+    const typed=await UIDialog.uiPrompt({title:'Confirmação extra',message:'Para confirmar a deleção, digite o slug:',placeholder:slug,confirmText:'Deletar',danger:true});
+    if(typed!==slug){toast('Cancelado: slug não confere.');return}
+  }else{
+    const ok=await UIDialog.uiConfirm({title:verb.charAt(0).toUpperCase()+verb.slice(1)+' loja',message:'Tem certeza que deseja '+verb+' "'+slug+'" na home?',confirmText:verb.charAt(0).toUpperCase()+verb.slice(1),danger:newState==='hidden'});
+    if(!ok)return;
+  }
+  try{
+    if(newState==='visible'){
+      const {error}=await supabaseClient.from('jebai_home_hidden_stores').delete().eq('slug',slug);
+      if(error)throw error;
+      _staticState.delete(slug);
+    }else{
+      const session=await JebaiAuth.getCurrentSession();
+      const row={slug,hidden_at:new Date().toISOString(),hidden_by:session?.user?.email||null,deleted:newState==='deleted'};
+      const {error}=await supabaseClient.from('jebai_home_hidden_stores').upsert([row],{onConflict:'slug'});
+      if(error)throw error;
+      _staticState.set(slug,newState);
+    }
+    addLog('Visibilidade',verb.toUpperCase()+': '+slug);
+    toast(newState==='visible'?'Restaurada na home':newState==='hidden'?'Loja ocultada da home':'Loja deletada da home');
+    renderStaticVisibility();
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+e.message);
+  }
+}
+
+async function deleteStore(id){
+  const s=_allStores.find(x=>x.id===id);
+  if(!s)return;
+  const msg='Excluir DEFINITIVAMENTE a loja "'+s.nome+'"?\n\n'+
+    '• A página pública vai parar de funcionar\n'+
+    '• Todos os produtos do catálogo serão apagados\n'+
+    '• Logo e banner serão removidos do Storage\n'+
+    '• O cargo do dono ('+s.owner_email+') volta a ser "cliente"\n\n'+
+    'Esta ação NÃO pode ser desfeita.';
+  const ok=await UIDialog.uiConfirm({title:'Excluir loja',message:msg,confirmText:'Quero excluir',danger:true});
+  if(!ok)return;
+  const typed=await UIDialog.uiPrompt({title:'Confirmação extra',message:'Para evitar exclusão acidental, digite o slug da loja:',placeholder:s.slug,confirmText:'Excluir',danger:true});
+  if(typed!==s.slug){toast('Cancelado: slug não confere.');return}
+  toast('Excluindo...');
+  try{
+    // 1. Buscar produtos pra apagar imagens deles também
+    const {data:products}=await supabaseClient.from('jebai_store_products').select('imagem_url').eq('store_id',id);
+    const filesToDelete=[];
+    // 2. Coletar arquivos do Storage (logo, banner, imagens de produto)
+    const STORE_BUCKET='jebai-stores';
+    const extractPath=(url)=>{
+      if(!url)return null;
+      const m=url.match(/\/storage\/v1\/object\/public\/jebai-stores\/(.+)$/);
+      return m?decodeURIComponent(m[1]):null;
+    };
+    [s.logo_url,s.banner_url].forEach(u=>{const p=extractPath(u);if(p)filesToDelete.push(p)});
+    (products||[]).forEach(p=>{const path=extractPath(p.imagem_url);if(path)filesToDelete.push(path)});
+    if(filesToDelete.length){
+      const {error:storageErr}=await supabaseClient.storage.from(STORE_BUCKET).remove(filesToDelete);
+      if(storageErr)console.warn('Storage remove (parcial):',storageErr.message);
+    }
+    // 3. Apagar a loja (CASCADE apaga produtos automaticamente)
+    const {error:delErr}=await supabaseClient.from(STORES_TABLE).delete().eq('id',id);
+    if(delErr)throw delErr;
+    // 4. Verificar se o dono tem outras lojas; se não, volta pra cliente
+    const {data:other}=await supabaseClient.from(STORES_TABLE).select('id').eq('owner_email',s.owner_email).limit(1);
+    if(!other||!other.length){
+      const {error:roleErr}=await supabaseClient.from(USERS_TABLE).update({role:'cliente'}).eq('email',s.owner_email);
+      if(roleErr)console.warn('Falha ao resetar role:',roleErr.message);
+    }
+    addLog('Exclusão','Loja excluída: '+s.nome+' (slug: '+s.slug+', dono: '+s.owner_email+', '+filesToDelete.length+' arquivos removidos)');
+    toast('Loja excluída');
+    loadStores();
+    loadStaticVisibility();
+  }catch(e){
+    console.warn(e);
+    toast('Erro: '+e.message);
+  }
+}
+</script>
+</body>
+</html>

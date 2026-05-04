@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://gsqcqpcliqbzmzkwpnxf.supabase.co wss://gsqcqpcliqbzmzkwpnxf.supabase.co https://api.allorigins.win https://api.codetabs.com; form-action 'self'; upgrade-insecure-requests">
+<title>Painel do vendedor — Jebai Center</title>
+<link rel="preconnect" href="https://gsqcqpcliqbzmzkwpnxf.supabase.co" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e6eaf0;
+  --teal:#20b2ad;--teal-dark:#159892;--yellow:#F5C800;--red:#cc0000;--green:#22a06b;
+  --shadow:0 12px 36px rgba(16,24,40,.08);--shadow2:0 6px 18px rgba(16,24,40,.06);
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Open Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+img{max-width:100%;display:block}
+
+/* TOPBAR */
+.topbar{min-height:72px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 26px;position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--teal),#4ad3cd);color:#fff;display:grid;place-items:center;font-family:'Montserrat';font-weight:900}
+.brand h2{font-family:'Montserrat';font-size:17px}
+.brand span{display:block;font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.top-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* BUTTONS */
+.btn{border-radius:12px;padding:11px 16px;font-family:'Montserrat';font-weight:800;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#fff;color:var(--text);transition:.18s;text-decoration:none}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow2)}
+.btn-primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn-primary:hover{background:var(--teal-dark);border-color:var(--teal-dark)}
+.btn-success{background:var(--green);color:#fff;border-color:var(--green)}
+.btn-soft{background:#eefcfb;color:var(--teal-dark);border-color:#c7f1ee}
+.btn-danger{color:var(--red)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+/* LAYOUT */
+.layout{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow2);margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hero h1{font-family:'Montserrat';font-size:26px;letter-spacing:-.3px}
+.hero p.muted{color:var(--muted);font-size:13px;margin-top:4px}
+.status-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:900;padding:6px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.status-draft{background:#fff8db;color:#7a5d00}
+.status-pending_review{background:#fff4e5;color:#b54708}
+.status-published{background:#eafaf2;color:#137547}
+.status-hidden{background:#f0f3f7;color:#445063}
+
+/* PANEL */
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow2);margin-bottom:18px}
+.panel h2{font-family:'Montserrat';font-size:18px;margin-bottom:6px}
+.panel p.muted{color:var(--muted);font-size:13px;margin-bottom:18px}
+
+/* FORM */
+.form-grid{display:grid;gap:14px}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{display:block;font-weight:800;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.field input[type="text"],.field input[type="email"],.field input[type="tel"],.field input[type="url"],.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 14px;outline:none;background:#fff;transition:.15s}
+.field textarea{min-height:90px;resize:vertical;font-family:inherit}
+.field input:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(32,178,173,.12)}
+.field-help{font-size:12px;color:var(--muted);margin-top:6px}
+.field-error{color:var(--red);font-size:12px;font-weight:700;margin-top:6px;display:none}
+.field-error.show{display:block}
+
+/* COLOR */
+.color-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.color-row input[type="color"]{width:60px;height:48px;border:1px solid var(--line);border-radius:12px;cursor:pointer;padding:2px;background:#fff}
+.color-row input[type="text"]{width:130px;font-family:'Montserrat',monospace;font-weight:800;text-transform:uppercase}
+.color-presets{display:flex;gap:8px;flex-wrap:wrap}
+.color-preset{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:transform .15s}
+.color-preset:hover{transform:scale(1.1)}
+
+/* IMAGE UPLOAD */
+.image-upload{display:grid;gap:10px}
+.image-preview{border:2px dashed var(--line);border-radius:14px;background:#fafbfc;display:grid;place-items:center;overflow:hidden;position:relative}
+.image-preview.logo{aspect-ratio:1/1;max-width:160px}
+.image-preview.banner{aspect-ratio:3/1;width:100%}
+.image-preview img{width:100%;height:100%;object-fit:cover}
+.image-preview .placeholder{color:var(--muted);font-size:13px;padding:20px;text-align:center}
+.image-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* PUBLISH BAR */
+.publish-bar{background:linear-gradient(135deg,#fef9e6,#fef6db);border:1px solid #ffeaa3;border-radius:18px;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.publish-bar.published{background:linear-gradient(135deg,#e6faef,#dffae5);border-color:#a8e8b6}
+.publish-bar.pending{background:linear-gradient(135deg,#fff4e5,#ffeed1);border-color:#ffd28a}
+.publish-bar h3{font-family:'Montserrat';font-size:16px;margin-bottom:2px}
+.publish-bar p{font-size:13px;color:var(--muted)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(30px);opacity:0;background:#111827;color:#fff;border-radius:999px;padding:12px 20px;font-weight:800;font-size:13px;z-index:200;transition:.25s;max-width:90vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.error{background:#b42318}
+.toast.success{background:#137547}
+
+/* LOADING / NO-STORE */
+.center-state{min-height:60vh;display:grid;place-items:center;text-align:center;padding:40px 20px}
+.center-state h1{font-family:'Montserrat';font-size:26px;margin-bottom:10px}
+.center-state p{color:var(--muted);max-width:520px;margin:0 auto 20px;line-height:1.6}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:8px}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;right:-20px;top:-30px;width:80px;height:80px;border-radius:50%;background:rgba(32,178,173,.08)}
+.stat-card .stat-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;color:var(--text);position:relative;z-index:1}
+.stat-card .stat-label{font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:6px}
+.stat-card small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+#statsRange{padding:8px 14px;font-size:12px}
+.top-products{display:grid;gap:8px}
+.top-product-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:#fafbfc;border:1px solid var(--line);border-radius:10px}
+.top-product-row .tp-name{font-weight:700;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-product-row .tp-clicks{font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;color:var(--teal-dark)}
+.top-empty{color:var(--muted);font-size:13px;padding:14px;text-align:center;background:#fafbfc;border:1px dashed var(--line);border-radius:10px}
+
+/* PRODUCTS LIST */
+.products-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:12px}
+.products-empty{grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--muted);background:#fafbfc;border:2px dashed var(--line);border-radius:14px}
+.product-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column;transition:.18s}
+.product-item:hover{box-shadow:var(--shadow2);transform:translateY(-1px)}
+.product-thumb{aspect-ratio:1/1;background:#fafbfc;display:grid;place-items:center;overflow:hidden}
+.product-thumb img{width:100%;height:100%;object-fit:cover}
+.product-thumb-empty{color:var(--line);font-size:38px}
+.product-body{padding:12px 14px;display:flex;flex-direction:column;flex:1;gap:6px}
+.product-body .pname{font-family:'Montserrat';font-weight:800;font-size:14px;line-height:1.3}
+.product-body .pprice{font-family:'Montserrat';font-weight:900;font-size:15px;color:var(--teal-dark)}
+.product-body .pdesc{font-size:12px;color:var(--muted);line-height:1.4;flex:1}
+.product-body .porder{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.product-actions{display:flex;gap:6px;padding:10px 14px;border-top:1px solid var(--line);background:#fafbfc}
+.product-actions .btn{flex:1;padding:8px 10px;font-size:12px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;z-index:300;padding:20px}
+.modal-overlay.active{display:flex}
+.modal-box{background:#fff;border-radius:22px;padding:26px;width:min(560px,100%);max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(15,23,42,.3)}
+.modal-box h3{font-family:'Montserrat';font-size:20px;margin-bottom:6px}
+.modal-box p.muted{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:14px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+
+@media(max-width:760px){
+  .row-2{grid-template-columns:1fr}
+  .layout{padding:20px 14px 50px}
+  .topbar{padding:12px 16px}
+  .products-list{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .products-list{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <div class="brand-mark">J</div>
+    <div>
+      <h2>Jebai Center</h2>
+      <span>Painel do vendedor</span>
+    </div>
+  </a>
+  <div class="top-actions">
+    <a id="viewStoreBtn" class="btn btn-soft" target="_blank" rel="noopener noreferrer" style="display:none">Ver minha loja</a>
+    <button class="btn btn-danger" id="logoutBtn" style="display:none">Sair</button>
+  </div>
+</header>
+
+<main class="layout">
+  <div id="loading" class="center-state"><div><h1>Carregando…</h1><p>Buscando os dados da sua loja.</p></div></div>
+
+  <!-- Não logado -->
+  <div id="notLogged" class="center-state" style="display:none">
+    <div>
+      <h1>Acesso restrito</h1>
+      <p>Esta página é exclusiva para vendedores cadastrados. Faça login para entrar no painel da sua loja.</p>
+      <a class="btn btn-primary" href="login.html">Entrar ou cadastrar</a>
+    </div>
+  </div>
+
+  <!-- Logado mas sem loja aprovada -->
+  <div id="noStore" class="center-state" style="display:none">
+    <div>
+      <h1>Você ainda não tem loja</h1>
+      <p>Para ter uma loja no Jebai Center, envie uma solicitação. Após aprovação, esse painel é liberado.</p>
+      <a class="btn btn-primary" href="solicitar-loja.html">Solicitar minha loja</a>
+    </div>
+  </div>
+
+  <!-- Painel principal -->
+  <div id="dashboard" style="display:none">
+    <div class="hero">
+      <div>
+        <h1 id="storeNameTitle">Sua loja</h1>
+        <p class="muted">slug: <code id="storeSlug"></code></p>
+      </div>
+      <span id="statusPill" class="status-pill">—</span>
+    </div>
+
+    <!-- Bar de publicação (varia por status) -->
+    <div id="publishBar" class="publish-bar">
+      <div>
+        <h3 id="publishTitle">Sua loja está em rascunho</h3>
+        <p id="publishMsg">Você pode editar livremente. Quando estiver pronta, clique em "Solicitar publicação" e o admin vai revisar.</p>
+      </div>
+      <button class="btn btn-success" id="publishBtn">Solicitar publicação</button>
+    </div>
+
+    <section class="panel">
+      <h2>Identidade da loja</h2>
+      <p class="muted">Como sua loja aparece para os clientes.</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="f-nome">Nome da loja</label>
+          <input id="f-nome" type="text" maxlength="80">
+          <div class="field-error" id="err-nome">Informe o nome da loja.</div>
+        </div>
+        <div class="field">
+          <label for="f-descricao">Descrição</label>
+          <textarea id="f-descricao" maxlength="400" placeholder="Conte em 2-3 frases o que sua loja vende"></textarea>
+          <div class="field-help">Aparece no topo da página da loja, abaixo do nome.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Cor principal</h2>
+      <p class="muted">Define a cor do hero, botões e destaques da sua loja.</p>
+      <div class="color-row">
+        <input type="color" id="f-cor" value="#7d3c98">
+        <input type="text" id="f-cor-hex" maxlength="7" placeholder="#7d3c98">
+        <div class="color-presets" id="colorPresets"></div>
+      </div>
+      <div class="field-help">Dica: escolha uma cor que combine com a identidade da sua marca.</div>
+    </section>
+
+    <section class="panel">
+      <h2>Logo e banner</h2>
+      <p class="muted">As imagens são salvas no Supabase Storage e ficam públicas no link da sua loja.</p>
+      <div class="row-2">
+        <div class="image-upload">
+          <label style="font-weight:800;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Logo (quadrada)</label>
+          <div class="image-preview logo" id="logoPreview">
+            <div class="placeholder">Sem logo<br><small>Clique em "Enviar" abaixo</small></div>
+          </div>
+          <div class="image-actions">
+            <input type="file" id="logoInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+            <button class="btn btn-soft" type="button" onclick="document.getElementById('logoInput').click()">Enviar logo</button>
+            <button class="btn btn-danger" type="button" id="removeLogoBtn">Remover</button>
+          </div>
+        </div>
+        <div class="image-upload">
+          <label style="font-weight:800;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Banner (formato wide)</label>
+          <div class="image-preview banner" id="bannerPreview">
+            <div class="placeholder">Sem banner<br><small>Recomendado: 1200×400px</small></div>
+          </div>
+          <div class="image-actions">
+            <input type="file" id="bannerInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+            <button class="btn btn-soft" type="button" onclick="document.getElementById('bannerInput').click()">Enviar banner</button>
+            <button class="btn btn-danger" type="button" id="removeBannerBtn">Remover</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Contatos</h2>
+      <p class="muted">Como os clientes podem falar com você.</p>
+      <div class="form-grid">
+        <div class="row-2">
+          <div class="field">
+            <label for="f-whatsapp">WhatsApp</label>
+            <input id="f-whatsapp" type="tel" placeholder="+595 ou 55...">
+            <div class="field-help">Aparece como botão "Chamar no WhatsApp".</div>
+          </div>
+          <div class="field">
+            <label for="f-telefone">Telefone</label>
+            <input id="f-telefone" type="tel" placeholder="(00) 00000-0000">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="f-instagram">Instagram</label>
+            <input id="f-instagram" type="text" placeholder="@sualoja">
+          </div>
+          <div class="field">
+            <label for="f-endereco">Endereço (dentro do Jebai Center)</label>
+            <input id="f-endereco" type="text" placeholder="Ex: Piso 1, loja 23">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px">
+        <div>
+          <h2>Estatísticas da loja</h2>
+          <p class="muted" style="margin-bottom:0">Quantas pessoas viram sua loja e clicaram nos produtos.</p>
+        </div>
+        <select class="btn" id="statsRange">
+          <option value="7">Últimos 7 dias</option>
+          <option value="30" selected>Últimos 30 dias</option>
+          <option value="0">Desde sempre</option>
+        </select>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="statViews">0</div><div class="stat-label">Visitas</div><small id="statViewsHelp">visitantes únicos</small></div>
+        <div class="stat-card"><div class="stat-num" id="statProductClicks">0</div><div class="stat-label">Cliques em produtos</div><small>botão "Ver oferta"</small></div>
+        <div class="stat-card"><div class="stat-num" id="statWhatsClicks">0</div><div class="stat-label">Cliques no WhatsApp</div><small>botão de contato</small></div>
+        <div class="stat-card"><div class="stat-num" id="statConversion">0%</div><div class="stat-label">Engajamento</div><small>cliques / visitas</small></div>
+      </div>
+      <div style="margin-top:18px">
+        <h3 style="font-family:'Montserrat';font-size:15px;margin-bottom:10px">Top produtos mais clicados</h3>
+        <div id="topProducts" class="top-products">
+          <div class="top-empty">Sem dados suficientes ainda.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Importar catálogo via XML</h2>
+      <p class="muted">Cole o link do feed XML da sua loja (Google Merchant, Tray, similar). Os produtos são criados automaticamente.</p>
+      <div class="form-grid">
+        <div class="field">
+          <label for="f-xml-url">Link do feed XML</label>
+          <input id="f-xml-url" type="url" placeholder="https://sualoja.com/feed.xml">
+          <div class="field-help">Aceita formato Google Merchant (item/g:title/g:price/g:image_link) ou similar (produto/nome/preco/imagem).</div>
+        </div>
+        <div id="xmlStatus" style="font-size:13px;color:var(--muted);min-height:18px"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-primary" type="button" id="importXmlBtn">Importar agora</button>
+          <button class="btn" type="button" id="saveXmlUrlBtn">Salvar link</button>
+          <button class="btn btn-danger" type="button" id="clearXmlBtn">Apagar link e produtos importados</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px">
+        <div>
+          <h2>Catálogo de produtos</h2>
+          <p class="muted" style="margin-bottom:0">Adicione produtos com foto, nome, preço e link. Eles aparecem automaticamente na sua loja.</p>
+        </div>
+        <button class="btn btn-primary" id="addProductBtn" type="button">+ Adicionar produto</button>
+      </div>
+      <div id="productsList" class="products-list"><div class="products-empty">Carregando produtos…</div></div>
+    </section>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:8px">
+      <button class="btn" id="resetBtn">Descartar mudanças</button>
+      <button class="btn btn-primary" id="saveBtn">Salvar</button>
+    </div>
+  </div>
+</main>
+
+<!-- Modal Adicionar/Editar produto -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-box">
+    <h3 id="productModalTitle">Adicionar produto</h3>
+    <p class="muted">Os campos com * são obrigatórios.</p>
+    <div class="form-grid">
+      <div class="image-upload">
+        <label style="font-weight:800;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Foto do produto</label>
+        <div class="image-preview" id="productImgPreview" style="aspect-ratio:1/1;max-width:160px">
+          <div class="placeholder">Sem foto</div>
+        </div>
+        <div class="image-actions">
+          <input type="file" id="productImgInput" accept="image/png,image/jpeg,image/webp" style="display:none">
+          <button class="btn btn-soft" type="button" onclick="document.getElementById('productImgInput').click()">Enviar foto</button>
+          <button class="btn btn-danger" type="button" id="productImgRemoveBtn">Remover</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="p-nome">Nome do produto *</label>
+        <input id="p-nome" type="text" maxlength="120">
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label for="p-preco">Preço</label>
+          <input id="p-preco" type="text" placeholder="Ex: $50 ou R$ 199,90">
+          <div class="field-help">Texto livre — você decide o formato.</div>
+        </div>
+        <div class="field">
+          <label for="p-ordem">Ordem</label>
+          <input id="p-ordem" type="number" min="0" placeholder="0">
+          <div class="field-help">Menor = aparece primeiro.</div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="p-descricao">Descrição</label>
+        <textarea id="p-descricao" maxlength="300" placeholder="Detalhes do produto (opcional)"></textarea>
+      </div>
+      <div class="field">
+        <label for="p-link">Link externo</label>
+        <input id="p-link" type="url" placeholder="https://... onde o cliente compra">
+        <div class="field-help">Se preencher, o botão "Ver oferta" no card vai abrir esse link.</div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" type="button" id="productCancelBtn">Cancelar</button>
+      <button class="btn btn-primary" type="button" id="productSaveBtn">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Pronto</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+<script src="auth-utils.js"></script>
+<script src="ui-dialog.js"></script>
+<script src="vendedor.js"></script>
+</body>
+</html>
